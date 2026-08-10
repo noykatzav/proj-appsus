@@ -34,7 +34,10 @@ export const mailService = {
 window.ms = mailService
 
 
-function query(filterBy = {}) {
+function query(options = {}) {
+    const filterBy = options.filterBy
+    const sortBy = options.sortBy
+
     return storageService.query(MAIL_KEY)
         .then(mails => {
             if (filterBy.txt) {
@@ -49,7 +52,13 @@ function query(filterBy = {}) {
             if (filterBy.isStarred) {
                 mails = mails.filter(mail => mail.isStarred === true)
             }
-            
+
+
+            if (sortBy.sortField === 'sentAt') {
+                mails.sort((mail1, mail2) => 
+                    (mail1.sentAt - mail2.sentAt) * sortBy.sortDir)
+            }            
+
             return mails
         })
 }
