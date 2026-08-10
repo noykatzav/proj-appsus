@@ -18,6 +18,10 @@
     padding-bottom: 4px;
 }
 
+.mail {
+    cursor: pointer;
+}
+
 .mail.read {
     background-color: var(--m-bg2);
 }

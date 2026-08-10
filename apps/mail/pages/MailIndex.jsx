@@ -23,22 +23,17 @@ export function MailIndex() {
     }
 
     function onSetMailRead(mail) {
-        return 
-        // const mailId = mail.id
-        // console.log(mail)
+        if (mail.isRead) return 
+        const mailId = mail.id        
+        console.log({...mail, isRead: true})
 
-        // const updatedMail = {...mail}
-        // updatedMail.isRead = true
-        
-        // // console.log(updatedMail)
-
-        // mailService.save(updatedMail)
-        //     .then(() => setMails(prev => 
-        //         prev.map(mail => 
-        //             mail.id !== mailId
-        //             ? mail.isRead = true
-        //             : mail
-        // )))
+        mailService.save({...mail, isRead: true})
+            .then(() => setMails(prev => 
+                prev.map(mail => 
+                    mail.id === mailId
+                    ? {...mail, isRead: true}
+                    : mail
+        )))
     }
 
     return <section className="mail-container">

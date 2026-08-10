@@ -1,6 +1,5 @@
 export function MailPreview({ mail, onSetMailRead }) {
-    const className = mail.isRead ? 'read' : ''
-    
+
     function formatDate(timestamp) {
         const date = new Date(timestamp)
         const currentYear = new Date().getFullYear()
@@ -14,8 +13,10 @@ export function MailPreview({ mail, onSetMailRead }) {
         return date.toLocaleDateString('en-GB', options)
     }
 
+    var className = 'mail'
+    if (mail.isRead) className += ' read'
 	
-    return <tr key={mail.id} className={'mail' + ' ' + className} onClick={onSetMailRead(mail)}>
+    return <tr key={mail.id} className={className} onClick={() => onSetMailRead(mail)}>
         <td>{mail.isStarred}</td>
         <td>{mail.from}</td>
         <td>{mail.subject}</td>
