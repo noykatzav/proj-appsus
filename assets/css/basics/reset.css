@@ -3,7 +3,7 @@
 }
 
 html {
-    font-family: google-san, sans-serif;
+    font-family: 'Google Sans', serif;
     color-scheme: light dark;
 }
 
@@ -17,6 +17,7 @@ html {
 h1, h2, h3, h4, h5, h6 {
     margin: 0 0 1em;
     text-wrap: balance;
+    font-family: 'Google Sans', serif;
 }
 
 p {

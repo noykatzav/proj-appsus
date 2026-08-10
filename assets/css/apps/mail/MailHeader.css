@@ -1,0 +1,13 @@
+ /* mail header  */
+
+.mail-header {
+    display: flex;
+    gap: .2rem;
+
+    padding-top: .3rem;
+    padding-left: 1rem;
+}
+
+.mail-header img {
+    height: 85%;
+}

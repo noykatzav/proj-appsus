@@ -1,8 +1,19 @@
  /* mail index  */
 
 .mail-container {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    grid-template-rows: 5vh 95vh;
+
     background-color: var(--m-bg1);
     font-size: 0.875rem;
+}
+
+.mail-header {
+    display: flex;
+    gap: .2rem;
+
+    padding: .4rem;
 }
 
 .mail-container table {
