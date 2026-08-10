@@ -1,4 +1,5 @@
-export function MailPreview({ mail }) {
+export function MailPreview({ mail, onSetMailRead }) {
+    const className = mail.isRead ? 'read' : ''
     
     function formatDate(timestamp) {
         const date = new Date(timestamp)
@@ -14,7 +15,7 @@ export function MailPreview({ mail }) {
     }
 
 	
-    return <tr key={mail.id}>
+    return <tr key={mail.id} className={'mail' + ' ' + className} onClick={onSetMailRead(mail)}>
         <td>{mail.isStarred}</td>
         <td>{mail.from}</td>
         <td>{mail.subject}</td>

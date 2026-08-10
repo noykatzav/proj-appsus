@@ -22,14 +22,34 @@ export function MailIndex() {
             .then(setMails)
     }
 
+    function onSetMailRead(mail) {
+        return 
+        // const mailId = mail.id
+        // console.log(mail)
+
+        // const updatedMail = {...mail}
+        // updatedMail.isRead = true
+        
+        // // console.log(updatedMail)
+
+        // mailService.save(updatedMail)
+        //     .then(() => setMails(prev => 
+        //         prev.map(mail => 
+        //             mail.id !== mailId
+        //             ? mail.isRead = true
+        //             : mail
+        // )))
+    }
+
     return <section className="mail-container">
         <MailHeader />
         <MailFilter />
         <MailMenu />
 
         <MailList
-            mails={mails} />
-        
+            mails={mails} 
+            onSetMailRead={onSetMailRead}
+        />
     </section>
 }
 
