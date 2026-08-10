@@ -11,7 +11,7 @@ export function MailIndex() {
     const [mails, setMails] = useState([])
     // const [ filterBy, setFilterBy ] = useState(mailService.getDefaultFilter())
     const [filterBy, setFilterBy] = useState({})
-    const [sortBy, setsortBy] = useState({})
+    const [sortBy, setsortBy] = useState(mailService.getDefaultSort())
 
     useEffect(() => {
         loadMails()

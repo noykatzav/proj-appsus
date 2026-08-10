@@ -28,7 +28,8 @@ export const mailService = {
     remove,
     save,
     getEmptyMail,
-    getDefaultFilter
+    getDefaultFilter,
+    getDefaultSort
 }
 // For Debug (easy access from console):
 window.ms = mailService
@@ -84,6 +85,10 @@ function getEmptyMail(subject = '', body = '', isRead = false, isStarred = false
 
 function getDefaultFilter(filterBy = { status: 'inbox/', txt: '', isRead: undefined, isStarred: undefined, lables: [] }) {
     return { status: filterBy.status, txt: filterBy.txt, isRead: filterBy.isRead, isStarred: filterBy.isStarred, lables: filterBy.lables }
+}
+
+function getDefaultSort(sortBy = { sortField: 'sentAt', sortDir: -1}) {
+    return { sortField: sortBy.sortField, sortDir: sortBy.sortDir} 
 }
 
 function _createMails() {
@@ -315,9 +320,8 @@ function _createMails() {
             const body = bodies[utilService.getRandomIntInclusive(0, bodies.length - 1)]
             const isRead = booleanOptions[utilService.getRandomIntInclusive(0, booleanOptions.length - 1)]
             const isStarred = booleanOptions[utilService.getRandomIntInclusive(0, booleanOptions.length - 1)]
-            const sentAt = Date.now() - utilService.getRandomIntInclusive(0, 500 * 24 * 60 * 60 * 1000)
+            const sentAt = Date.now() - utilService.getRandomIntInclusive(0, 500) * 24 * 60 * 60 * 1000
             const from = users[utilService.getRandomIntInclusive(0, users.length - 1)].email
-            console.log(LoggedinUser + ' | '  + LoggedinUser.email)
             const to = LoggedinUser.email
 
             mails.push(_createMail(subject, body, isRead, isStarred, sentAt, from, to))
