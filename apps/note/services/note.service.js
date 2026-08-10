@@ -21,7 +21,7 @@ function getEmptyNote(txt = '') {
     return {
 
         id: '',
-        createdAt: getCurrentTimestamp(),
+        createdAt: utilService.getCurrentTimestamp(),
         type: 'NoteTxt',
         isPinned: false,
         style: {
