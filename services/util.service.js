@@ -7,7 +7,8 @@ export const utilService = {
     getDayName,
     getMonthName,
     loadFromStorage,
-    saveToStorage
+    saveToStorage,
+    getCurrentTimestamp
 }
 
 function saveToStorage(key, val) {
@@ -70,4 +71,8 @@ function getMonthName(date) {
         "July", "August", "September", "October", "November", "December"
     ]
     return monthNames[date.getMonth()]
+}
+
+function getCurrentTimestamp() {
+    return Date.now()
 }
