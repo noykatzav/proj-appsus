@@ -1,9 +1,13 @@
-
+/* Setup */
 @import './basics/vars.css';
+
+/* Base */
 @import './basics/base.css';
 @import './basics/helpers.css';
 @import './basics/layout.css';
+@import './basics/reset.css';
 
+/* Components */
 @import './cmps/home.css';
 @import './cmps/UserMsg.css';
 @import './cmps/AppHeader.css';

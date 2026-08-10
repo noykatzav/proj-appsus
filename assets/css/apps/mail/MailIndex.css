@@ -1,1 +1,10 @@
  /* mail index  */
+
+.mail-container {
+    background-color: var(--m-bg1);
+    font-size: 0.875rem;
+}
+
+.mail-container table {
+    border-collapse: collapse;
+}

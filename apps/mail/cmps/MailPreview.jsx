@@ -1,4 +1,5 @@
 export function MailPreview({ mail }) {
+	
     return <tr key={mail.id}>
         <td>{mail.isStarred}</td>
         <td>{mail.from}</td>
