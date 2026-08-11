@@ -29,7 +29,8 @@ export const mailService = {
     save,
     getEmptyMail,
     getDefaultFilter,
-    getDefaultSort
+    getDefaultSort,
+    getFilterFromSearchParams
 }
 // For Debug (easy access from console):
 window.ms = mailService
@@ -85,6 +86,16 @@ function getEmptyMail(subject = '', body = '', isRead = false, isStarred = false
 
 function getDefaultFilter(filterBy = { status: 'inbox/', txt: '', isRead: undefined, isStarred: undefined, lables: [] }) {
     return { status: filterBy.status, txt: filterBy.txt, isRead: filterBy.isRead, isStarred: filterBy.isStarred, lables: filterBy.lables }
+}
+
+function getFilterFromSearchParams(searchParams) {
+    const defaultFilter = getDefaultFilter()
+    const filterBy = {}
+
+    for (const field in defaultFilter) {
+        filterBy[field] = searchParams.get(field) || ''
+    }
+    return filterBy
 }
 
 function getDefaultSort(sortBy = { sortField: 'sentAt', sortDir: -1}) {
