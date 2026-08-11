@@ -1,12 +1,15 @@
 
 
 export function NoteList({notes}) {
-    return   <div className="note-list">
+    return <section className="note-list">
             {notes.map(note => (
-                <div key={note.id}>
+                <div 
+                className="note-preview"
+                key={note.id}
+                style={note.style}    
+                >
                     {note.info.txt}
                 </div>
             ))}
-        </div>
-    
+    </section>
 }

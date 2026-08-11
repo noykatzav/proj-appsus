@@ -1,0 +1,27 @@
+.note-header {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 0 8px;
+
+    border-bottom: 1px solid #dadce0;
+}
+
+.note-header h1 {
+    margin: 0;
+
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--logo-text);
+}
+
+.keep-logo {
+    font-size: 30px;
+}
+
+.keep-logo img{
+       width: 40px;
+    height: 40px;
+}
