@@ -67,6 +67,10 @@ function query(options = {}) {
 
 function get(mailId) {
     return storageService.get(MAIL_KEY, mailId)
+        .then(mail => {
+            mail = _setNextPrevMailId(mail)
+            return mail
+        })
 }
 
 function remove(mailId) {
@@ -341,9 +345,19 @@ function _createMails() {
     }
 }
 
-
 function _createMail(subject, body, isRead, isStarred, sentAt, from, to, removedAt) {
     const mail = getEmptyMail(subject, body, isRead, isStarred, sentAt, from, to, removedAt)
     mail.id = utilService.makeId(11)
     return mail
+}
+
+function _setNextPrevMailId(mail) {
+    return storageService.query(MAIL_KEY).then((mails) => {
+        const mailIdx = mails.findIndex((currMail) => currMail.id === mail.id)
+        const nextMail = mails[mailIdx + 1] ? mails[mailIdx + 1] : mails[0]
+        const prevMail = mails[mailIdx - 1] ? mails[mailIdx - 1] : mails[mails.length - 1]
+        mail.nextMailId = nextMail.id
+        mail.prevMailId = prevMail.id
+        return mail
+    })
 }

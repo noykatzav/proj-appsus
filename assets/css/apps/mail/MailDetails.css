@@ -1,0 +1,10 @@
+ /* mail details  */
+
+ .loader {
+    text-align: center;
+}
+
+.loader img {
+    margin-block-start: 200px;
+    margin-inline: auto;
+}
