@@ -16,10 +16,10 @@ export function MailPreview({ mail, onSetMailRead }) {
     var className = 'mail'
     if (mail.isRead) className += ' read'
 	
-    return <tr key={mail.id} className={className} onClick={() => onSetMailRead(mail)}>
-        <td>{mail.isStarred}</td>
-        <td>{mail.from}</td>
-        <td>{mail.subject}</td>
-        <td>{mail.sentAt && formatDate(mail.sentAt)}</td>
-    </tr>
+    return <div className={className} onClick={() => onSetMailRead(mail)}>
+            <p>{mail.isStarred}</p>
+            <p>{mail.from}</p>
+            <p>{mail.subject}</p>
+            <p>{mail.sentAt && formatDate(mail.sentAt)}</p>
+        </div>
 }

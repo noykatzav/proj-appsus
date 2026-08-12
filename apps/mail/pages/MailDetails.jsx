@@ -4,14 +4,7 @@ import { mailService } from '../services/mail.service.js'
 
 export function MailDetails() {
 
-    return <section className="mail-container">
-        <MailHeader />
-        <MailFilter />
-        <MailMenu />
+    return <section>mail
 
-        <MailList
-            mails={mails} 
-            onSetMailRead={onSetMailRead}
-        />
     </section>
 }

@@ -1,6 +1,6 @@
  /* mail index  */
 
-.mail-container {
+.mail-index {
     display: grid;
     grid-template-columns: 1fr 6fr;
     grid-template-rows: 5vh 95vh;
@@ -14,8 +14,4 @@
     gap: .2rem;
 
     padding: .4rem;
-}
-
-.mail-container table {
-    border-collapse: collapse;
 }

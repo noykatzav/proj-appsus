@@ -51,7 +51,7 @@ export function MailIndex() {
         )))
     }
 
-    return <section className="mail-container">
+    return <section className="mail-index">
         <MailHeader />
         <MailFilter />
         <MailMenu />
@@ -60,10 +60,6 @@ export function MailIndex() {
             mails={mails} 
             onSetMailRead={onSetMailRead}
         />
-
-        <Link to="/mail/edit">
-            <button>Add a Car</button>
-        </Link>
     </section>
 }
 
