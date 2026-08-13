@@ -9,6 +9,7 @@
 //     removedAt : null,
 //     from: 'momo@momo.com',
 //     to: 'user@appsus.com'
+
 // }
 
 import { utilService } from '../../../services/util.service.js'
@@ -84,6 +85,7 @@ function save(mail) {
         return storageService.post(MAIL_KEY, mail)
     }
 }
+
 function getEmptyMail(subject = '', body = '', isRead = false, isStarred = false, sentAt = utilService.getCurrentTimestamp(), from = '', to = '', removedAt = null, createdAt = utilService.getCurrentTimestamp()) {
     return { createdAt, subject, body, isRead, isStarred, sentAt, removedAt, from, to }
 }
