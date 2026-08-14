@@ -1,0 +1,36 @@
+.mail-det-header {
+    display: grid;
+    grid-template-columns:  minmax(300px, 3fr) minmax(100px, 1fr) 30px;
+
+    padding-top: 20px;
+    padding-inline: 80px;
+
+}
+
+.mail-det-header .title {
+    grid-column: 1 / span 3;
+    
+    font-size: 1.375rem;
+    font-weight: 400;
+}
+
+.mail-det-header .from {
+    font-family: 'Google Sans Bold', serif;
+}
+
+.mail-det-header .to, .time {
+    font-size: .75rem;
+    color: var(--m-gray3);
+}
+
+.mail-det-header .to {
+    place-self: start;
+}
+
+.mail-det-header .time {
+    place-self: center end;
+}
+
+.mail-det-header p {
+    margin: 0;
+}

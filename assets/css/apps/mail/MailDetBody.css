@@ -1,0 +1,8 @@
+.mail-details-body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    line-height: 1.5;
+
+    margin-top: .75rem;
+    padding-inline: 80px;
+}

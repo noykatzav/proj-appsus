@@ -1,7 +1,5 @@
 const { useState, useEffect } = React
-const Router = ReactRouterDOM.HashRouter
-const { Routes, Route } = ReactRouterDOM
-const { Link, useSearchParams } = ReactRouterDOM
+const { useSearchParams } = ReactRouterDOM
 
 
 import { MailList } from '../cmps/MailList.jsx'

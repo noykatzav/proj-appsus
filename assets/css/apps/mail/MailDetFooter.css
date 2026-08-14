@@ -1,0 +1,13 @@
+.mail-details-footer {
+    border-top: var(--m-border) 1px solid;
+    padding: .75rem;
+    margin-top: 1rem;
+}
+
+.mail-details-footer nav {
+    text-align: center;
+}
+
+button:hover {
+    cursor: pointer;
+}

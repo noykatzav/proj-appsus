@@ -1,0 +1,7 @@
+.mail-det-actions {
+    display: flex;
+    gap: .5rem;
+    border-bottom: var(--m-border) 1px solid;
+    padding: .75rem;
+    font-size:.9rem;
+}
