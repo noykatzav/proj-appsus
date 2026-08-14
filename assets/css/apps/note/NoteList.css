@@ -1,1 +1,33 @@
  /* note list */
+
+ .notes-container {
+     /* padding: 32px; */
+ }
+
+ .note-list {
+     display: grid;
+     grid-template-columns: repeat(auto-fill, 240px);
+     gap: 16px;
+
+     justify-content: center;
+      align-items: start;
+      margin-top: 24px;   /* הרווח מהפס האפור לפתקים */
+    padding: 0 32px; 
+ }
+
+ .note-preview {
+     padding: 16px;
+
+     border: 1px solid var(--note-border);
+     border-radius: 8px;
+     background-color: var(--note-bg);
+
+     font-size: 11pt;
+     line-height: 18pt;
+
+     box-sizing: border-box;
+     overflow: hidden;
+     position: relative;
+
+
+ }

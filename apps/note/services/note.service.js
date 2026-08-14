@@ -38,7 +38,7 @@ function _createNotes() {
 
     if (!notes || !notes.length) {
         notes = []
-        const texts = ['Fullstack Me Baby!', 'Bobi and Me', 'Get my stuff together']
+        const texts = ['Fullstack Me Baby!', 'Bobi and Me', 'Get my stuff together Get my stuff together Get my stuff together']
 
         for (let i = 0; i < texts.length; i++) {
             notes.push(_createNote(texts[i]))

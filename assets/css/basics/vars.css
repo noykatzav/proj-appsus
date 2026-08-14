@@ -2,7 +2,7 @@
     --bg1: lightblue;
     --bg2: rgb(50, 160, 204);
     --bg3: rgb(89, 134, 206);
-    
+
     --color1: rgb(26, 115, 232);
     --color2: rgb(24, 128, 56);
     --color3: rgb(197, 34, 31);
@@ -10,7 +10,7 @@
     --gray2: #aaa;
     --gray2: #888;
     --gray2: #333;
-    
+
     /* mail app */
     --m-bg4: rgb(221, 240, 246);
     --m-bg1: rgba(255, 255, 255, 0.8);
@@ -21,5 +21,10 @@
     --m-gray2: rgb(34, 34, 34);
     --m-gray3: rgb(94, 94, 94);
  
-    --m-border: rgba(100, 121, 143, 0.12)
+    --m-border: rgba(100, 121, 143, 0.12);
+
+    /* not app */
+    --logo-text: #1f1f1f;
+    --note-border: #e0e0e0;
+    --note-bg: #fff;
 }
