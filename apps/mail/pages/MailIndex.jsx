@@ -48,11 +48,12 @@ export function MailIndex() {
                     : mail
         )))
     }
+    
 
     return <section className="mail-index">
         <MailHeader />
         <MailFilter />
-        <MailMenu />
+        <MailMenu mails={mails} />
 
         <MailList
             mails={mails} 
