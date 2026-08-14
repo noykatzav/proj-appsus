@@ -9,15 +9,22 @@
     margin-inline: auto;
 }
 
+.mail-menu a {
+    width: 100%;
+}
+
 .mail-menu .category {
     display: flex;
-    width: 100%;
-    gap: .5rem;
+    gap: .8rem;
 
     align-items: center;
-    padding: 6px 12px;
+    padding: 6px 18px;
     
-    border-radius: 15px;
+    border-radius: 0 15px 15px 0;
+}
+
+.mail-menu .category > :last-child {
+    margin-inline-start: auto;
 }
 
 .category.chosen {
