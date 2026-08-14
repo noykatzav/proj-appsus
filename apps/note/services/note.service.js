@@ -8,6 +8,7 @@ _createNotes()
 
 export const noteService = {
     query,
+    save,
     getEmptyNote
 }
 
@@ -54,6 +55,15 @@ function _createNote(txt) {
     note.id = utilService.makeId()
     return note
 }
+
+function save(note) {
+    if (note.id) {
+        return storageService.put(NOTE_KEY, note)
+    } else {
+        return storageService.post(NOTE_KEY, note)
+    }
+}
+
 
 
 // const notes = [

@@ -1,0 +1,70 @@
+.note-add {
+    position: relative;
+    width: 600px;
+    height: 46px !important;
+    margin: 32px auto;
+    padding: 12px 16px 48px;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid var(--note-border);
+    border-radius: 8px;
+
+    background-color: var(--note-bg);
+
+    box-shadow:
+        0 1px 2px rgba(60, 64, 67, 0.3),
+        0 2px 6px 2px rgba(60, 64, 67, 0.15);
+
+    cursor: text;
+
+    overflow-wrap: break-word;
+    padding: 12px 16px 12px 16px;
+    box-sizing: border-box;
+}
+
+.note-add textarea {
+
+    width: 100%;
+    min-height: 24px;
+
+    border: none;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+
+    background: transparent;
+    font-size: 16px;
+    box-sizing: border-box;
+    font-family: inherit;
+    line-height: 1.38;
+    color: rgba(0, 0, 0, 0.6);
+    
+    
+}
+
+
+
+.note-close-btn {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+
+
+    padding: 8px 24px;
+
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.note-close-btn:hover {
+    background-color: rgba(95, 99, 104, 0.08);
+    border-radius: 4px;
+}

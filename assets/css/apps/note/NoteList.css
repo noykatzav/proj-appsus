@@ -3,20 +3,25 @@
  .notes-container {
      /* padding: 32px; */
  }
-
+ 
  .note-list {
-     display: grid;
-     grid-template-columns: repeat(auto-fill, 240px);
-     gap: 16px;
-
-     justify-content: center;
-      align-items: start;
-      margin-top: 24px;   /* הרווח מהפס האפור לפתקים */
+    /* display: grid;
+        grid-template-columns: repeat(auto-fill, 240px);
+        gap: 16px;
+    
+        justify-content: center;
+        align-items: start; */
+        columns: 7 240px;
+            column-gap: 16px;
+      margin-top: 24px;  
     padding: 0 32px; 
  }
 
  .note-preview {
+     
      padding: 16px;
+     margin-bottom: 16px;
+   break-inside: avoid;
 
      border: 1px solid var(--note-border);
      border-radius: 8px;
@@ -27,7 +32,8 @@
 
      box-sizing: border-box;
      overflow: hidden;
-     position: relative;
+
+
 
 
  }
