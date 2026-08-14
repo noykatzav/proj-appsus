@@ -1,3 +1,3 @@
 export function MailFilter() {
-    return <section>Search</section>
+    return <section className="mail-filter">Search</section>
 }

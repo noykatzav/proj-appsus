@@ -12,7 +12,7 @@
 .mail-details-container {
     display: grid;
     justify-items: center;
-    background-color: var(--m-bg4);
+    background-color: var(--m-bg1);
 }
 
 .mail-details {
@@ -26,8 +26,8 @@
     color: var(--m-gray1);
     font-size: .875rem;
 
-    background-color: var(--m-bg1);
-    box-shadow: 0 5px 10px #333333;
+    background-color: var(--m-bg2);
+    box-shadow: rgb(207, 207, 207) 0px 0px 5px 2px;
 
 }
 

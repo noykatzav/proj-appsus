@@ -1,0 +1,25 @@
+/* mail menu */
+
+.mail-menu {
+    display: grid;
+    place-items: start;
+
+    width: 95%;
+    margin-block-start: .5rem;
+    margin-inline: auto;
+}
+
+.mail-menu .category {
+    display: flex;
+    width: 100%;
+    gap: .5rem;
+
+    align-items: center;
+    padding: 6px 12px;
+    
+    border-radius: 15px;
+}
+
+.category.chosen {
+    background-color: rgb(211, 227, 253);
+}
