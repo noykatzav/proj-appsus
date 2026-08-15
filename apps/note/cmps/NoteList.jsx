@@ -1,16 +1,16 @@
+const { Link } = ReactRouterDOM
 
-
-export function NoteList({notes, onSelectNote}) {
+export function NoteList({ notes }) {
     return <section className="note-list">
-            {notes.map(note => (
-                <div 
+        {notes.map(note => (
+            <Link
+                to={`/note/edit/${note.id}`}
                 className="note-preview"
                 key={note.id}
-                style={note.style}    
-                onClick={()=> onSelectNote(note)}
-                >
-                    {note.info.txt}
-                </div>
-            ))}
+                style={note.style}
+            >
+                {note.info.txt}
+            </Link>
+        ))}
     </section>
 }

@@ -8,6 +8,7 @@ _createNotes()
 
 export const noteService = {
     query,
+    get,
     save,
     getEmptyNote
 }
@@ -17,6 +18,9 @@ function query() {
     return storageService.query(NOTE_KEY)
 }
 
+function get(noteId) {
+    return storageService.get(NOTE_KEY, noteId)
+}
 
 function getEmptyNote(txt = '') {
     return {
