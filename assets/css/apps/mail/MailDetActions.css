@@ -5,3 +5,7 @@
     padding: .75rem;
     font-size:.9rem;
 }
+
+.mail-det-actions .mark-unread {
+    font-size: 1.1rem;
+}
