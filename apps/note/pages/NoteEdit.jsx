@@ -23,6 +23,9 @@ function loadNote() {
         const field = target.name
         let value = target.value
 
+        target.style.height = 'auto'
+        target.style.height = target.scrollHeight + 'px'
+
         setNote(prevNote => ({
             ...prevNote,
             info: {

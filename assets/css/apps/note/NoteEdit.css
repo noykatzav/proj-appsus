@@ -1,0 +1,56 @@
+.note-edit-backdrop {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(32, 33, 36, 0.6);
+
+    transition: opacity .218s ease-in;
+    z-index: 4000;
+
+}
+
+.note-edit-modal {
+    width: 600px;
+    min-height: 171px;
+    max-height: 821px;
+    border-radius: 8px;
+    background-color: var(--note-bg);
+    border: none;
+    box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
+    box-sizing: border-box;
+    padding: 16px;
+    opacity: 1;
+}
+
+.note-edit-modal textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 0;
+
+    border: none;
+    outline: none;
+    resize: none;
+        overflow: hidden;
+
+    line-height: 18pt;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: 16px;
+
+    box-sizing: border-box;
+}
+
+.note-edit-modal button {
+    display: block;
+    margin-left: auto;
+
+    padding: 8px 24px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+}
