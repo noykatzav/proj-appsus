@@ -18,6 +18,7 @@
 @import './apps/mail/MailMenu.css';
 @import './apps/mail/MailList.css';
 @import './apps/mail/MailHeader.css';
+@import './apps/mail/MailPreview.css';
 @import './apps/mail/MailDetails.css';
 @import './apps/mail/MailDetActions.css';
 @import './apps/mail/MailDetHeader.css';

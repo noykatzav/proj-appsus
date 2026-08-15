@@ -19,7 +19,7 @@ export function MailDetHeader({ mail }) {
             <h1 className="title">{mail.subject}</h1>
             <span className="from">{`<${mail.from}>`}</span>
             <span className="time">{mail.sentAt && formatDetailsDate(mail.sentAt)}</span>
-            <button><i className={starClassName}></i></button>
+            <button className="star"><i className={starClassName}></i></button>
             <span className="to">{mail.to}</span>
         </header>
 }

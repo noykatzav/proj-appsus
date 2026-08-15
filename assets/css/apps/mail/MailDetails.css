@@ -23,7 +23,7 @@
     width: max(800px, 60vw);
     padding-block: .5rem;
 
-    color: var(--m-gray1);
+    color: var(--m-gray2);
     font-size: .875rem;
 
     background-color: var(--m-bg2);
@@ -35,5 +35,9 @@
     border: none;
     
     background-color: transparent;
-    color: var(--m-txt);
+    color: rgb(68, 68, 68);
+}
+
+.mail-details .star {
+    color: rgb(34, 34, 34);
 }
