@@ -1,7 +1,7 @@
 import { utilService } from '../../../services/util.service.js'
 
 
-export function MailPreview({ mail, onSetMailRead, onRemoveMail}) {
+export function MailPreview({ mail, onSetMailRead, onSetMailUnread, onRemoveMail }) {
    
     function formatPreviewDate(timestamp) {
         const isToday = utilService.isToday(timestamp)
@@ -33,7 +33,13 @@ export function MailPreview({ mail, onSetMailRead, onRemoveMail}) {
                                         }}>
                     <i className="fa-solid fa-trash"></i>
                 </button>
-                <button className="mark-unread"><i className="fa-regular fa-envelope"></i></button>
+                <button className="mark-unread"
+                    onClick={(event) => {event.preventDefault()
+                                        event.stopPropagation()
+                                        onSetMailUnread(mail)
+                                        }}>
+                    <i className="fa-regular fa-envelope"></i>
+                </button>
             </div>
         </div>
 }

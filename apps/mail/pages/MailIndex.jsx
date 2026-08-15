@@ -39,13 +39,25 @@ export function MailIndex() {
     function onSetMailRead(mail) {
         if (mail.isRead) return 
         const mailId = mail.id        
-        console.log({...mail, isRead: true})
 
         mailService.save({...mail, isRead: true})
             .then(() => setMails(prev => 
                 prev.map(mail => 
                     mail.id === mailId
                     ? {...mail, isRead: true}
+                    : mail
+        )))
+    }
+
+    function onSetMailUnread(mail) {
+        if (!mail.isRead) return 
+        const mailId = mail.id        
+
+        mailService.save({...mail, isRead: false})
+            .then(() => setMails(prev => 
+                prev.map(mail => 
+                    mail.id === mailId
+                    ? {...mail, isRead: false}
                     : mail
         )))
     }
@@ -69,6 +81,7 @@ export function MailIndex() {
         <MailList
             mails={mails} 
             onSetMailRead={onSetMailRead}
+            onSetMailUnread={onSetMailUnread}
             onRemoveMail={onRemoveMail}
         />
     </section>
