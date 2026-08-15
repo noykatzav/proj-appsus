@@ -11,7 +11,7 @@ export function MailPreview({ mail, onSetMailRead }) {
         : utilService.getUsFormatDate(timestamp)
     }
 
-    var mailClassName = 'mail'
+    var mailClassName = 'mail-preview'
     var starClassName = 'fa-solid fa-star'
 	
     if (mail.isRead) mailClassName += ' read'
@@ -19,8 +19,13 @@ export function MailPreview({ mail, onSetMailRead }) {
 
     return <div className={mailClassName} onClick={() => onSetMailRead(mail)}>
             <button><i className={starClassName}></i></button>
-            <p>{mail.from}</p>
-            <p>{mail.subject}</p>
-            <p>{mail.sentAt && formatPreviewDate(mail.sentAt)}</p>
+            <span>{mail.from}</span>
+            <span>{mail.subject}</span>
+            <span className="mail-time">{mail.sentAt && formatPreviewDate(mail.sentAt)}</span>
+
+            <div className="mail-actions">
+                <button className="remove"><i className="fa-solid fa-trash"></i></button>
+                <button className="mark-unread"><i className="fa-regular fa-envelope"></i></button>
+            </div>
         </div>
 }

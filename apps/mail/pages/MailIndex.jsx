@@ -6,6 +6,7 @@ import { MailList } from '../cmps/MailList.jsx'
 import { MailFilter } from '../cmps/MailFilter.jsx'
 import { MailMenu } from '../cmps/MailMenu.jsx'
 import { MailHeader } from '../cmps/MailHeader.jsx'
+import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 import { utilService } from '../../../services/util.service.js'
 import { mailService } from '../services/mail.service.js'
 import { useEffectUpdate } from '../../../custom-hooks/useEffectUpdate.js'
@@ -48,6 +49,17 @@ export function MailIndex() {
                     : mail
         )))
     }
+
+    function onRemoveMail(mailId) {
+		mailService
+			.remove(mailId)
+			.then(() => {
+				setMails(prev => prev.filter(mail => mail.id !== mailId))
+				onClearFilter()
+				showSuccessMsg(`mail ${mailId} removed`)
+			})
+			.catch(err => showErrorMsg(`Couldn't remove ${mailId}`))
+	}
     
 
     return <section className="mail-index">
