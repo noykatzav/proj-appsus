@@ -23,8 +23,7 @@ export function NoteAdd({ onAddNote }) {
         setInfo({ txt: '' })
     }
 
-    return (
-        <section className="note-add">
+    return  <section className="note-add">
             <textarea
                 name="txt"
                 value={info.txt}
@@ -36,6 +35,5 @@ export function NoteAdd({ onAddNote }) {
                 Done
             </button>
         </section>
-    )
 }
 
