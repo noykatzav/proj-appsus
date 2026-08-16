@@ -1,19 +1,26 @@
-const { useState, useEffect } = React
+const { useState, useEffect, useRef } = React
 const { useParams, useNavigate } = ReactRouterDOM
 
 import { noteService } from '../services/note.service.js'
 
 export function NoteEdit({ onSaveNote, onClose }) {
     const [note, setNote] = useState(null)
+    const textAreaRef = useRef(null)
 
     const { noteId } = useParams()
     const navigate = useNavigate()
 
-      useEffect(() => {
+    useEffect(() => {
         loadNote()
     }, [noteId])
 
-function loadNote() {
+    useEffect(() => {
+        if (!note) return
+        textAreaRef.current.style.height = 'auto'
+        textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 'px'
+    }, [note])
+
+    function loadNote() {
         noteService.get(noteId)
             .then(setNote)
     }
@@ -35,30 +42,30 @@ function loadNote() {
         }))
     }
 
-    function onSave(){
+    function onSave() {
         noteService.save(note)
             .then(() => {
-               onSaveNote()
+                onSaveNote()
                 navigate('/note')
             })
     }
 
     if (!note) return null
     return <div className="note-edit-backdrop" onClick={onClose}>
-            <div
-                className="note-edit-modal"
-                onClick={ev => ev.stopPropagation()}
-            >
-                <textarea
-                    name="txt"
-                    value={note.info.txt}
-                    onChange={handleChange}
-                />
+        <div
+            className="note-edit-modal"
+            onClick={ev => ev.stopPropagation()}
+        >
+            <textarea
+                ref={textAreaRef}
+                name="txt"
+                value={note.info.txt}
+                onChange={handleChange}
+            />
 
-                <button onClick={onSave}>
-                    Done
-                </button>
-            </div>
+            <button onClick={onSave}>
+                Done
+            </button>
         </div>
+    </div>
 }
-    

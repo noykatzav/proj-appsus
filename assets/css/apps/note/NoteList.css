@@ -11,8 +11,8 @@
     
         justify-content: center;
         align-items: start; */
-     /* columns: 7 240px; */
-     column-count: 7;
+     columns: 6 240px;
+    /* column-count: 6; */
      column-gap: 16px;
      margin-top: 24px;
      padding: 0 32px;
