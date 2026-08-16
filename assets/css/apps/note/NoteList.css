@@ -22,7 +22,7 @@
 
  .note-preview {
 
-     padding: 16px;
+     padding: 16px 16px 4px;
      margin-bottom: 16px;
      break-inside: avoid;
 
@@ -37,10 +37,61 @@
      overflow: hidden;
      color: inherit;
      text-decoration: none;
-     display: inline-block;
+     /* display: inline-block; */
      width: 100%;
      max-width: 100%;
      overflow-wrap: anywhere;
      word-break: break-word;
      break-inside: avoid;
+
+     display: flex;
+     flex-direction: column;
+     /* justify-content: space-between; */
+      min-height: 104px;
+    gap: 12px; }
+
+.note-content{
+    flex-grow: 1;
+    color: inherit;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+ .note-actions{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: auto;
+    margin-left: -8px;
+    opacity: 0;
+ }
+
+ .note-preview:hover .note-actions{
+    opacity: 1;
+ }
+
+ .note-actions button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    border-radius: 50%;
+
+    cursor: pointer;
+
+ }
+
+  .note-actions button:hover{
+    background-color: var(--not-actions-hover);
+  }
+
+ .note-actions img{
+    width: 18px;
+    height: 18px;
  }

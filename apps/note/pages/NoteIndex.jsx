@@ -27,21 +27,26 @@ export function NoteIndex() {
         noteService.save(note)
             .then(loadNotes)
     }
-function getNoteEdit() {
-    if (!noteId) return null
+    function getNoteEdit() {
+        if (!noteId) return null
 
-    return (
-        <NoteEdit
-            onSaveNote={loadNotes}
-            onClose={() => navigate('/note')}
-        />
-    )
-}
- 
+        return (
+            <NoteEdit
+                onSaveNote={loadNotes}
+                onClose={() => navigate('/note')}
+            />
+        )
+    }
+
+    function onRemoveNote(noteId) {
+        noteService.remove(noteId)
+            .then(loadNotes)
+    }
+
     return <section className="notes-container">
         <NoteHeader />
         <NoteAdd onAddNote={onAddNote} />
-        <NoteList notes={notes} />
+        <NoteList notes={notes} onRemoveNote={onRemoveNote} />
         {getNoteEdit()}
     </section>
 }

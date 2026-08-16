@@ -1,16 +1,30 @@
 const { Link } = ReactRouterDOM
 
-export function NoteList({ notes }) {
+export function NoteList({ notes, onRemoveNote }) {
     return <section className="note-list">
         {notes.map(note => (
-            <Link
-                to={`/note/edit/${note.id}`}
+            <div
                 className="note-preview"
                 key={note.id}
                 style={note.style}
             >
-                {note.info.txt}
-            </Link>
+
+                <Link
+                    to={`/note/edit/${note.id}`}
+                    className="note-content"
+                >
+                    {note.info.txt}
+                </Link>
+
+                <div className="note-actions">
+                    <button
+                        type="button"
+                        onClick={() => onRemoveNote(note.id)}
+                    >
+                        <img src="imgs/trash.svg" alt="Delete" />
+                    </button>
+                </div>
+            </div>
         ))}
     </section>
 }
