@@ -11,7 +11,6 @@ import { noteService } from '../services/note.service.js'
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
     const { noteId } = useParams()
-    const navigate = useNavigate()
 
     useEffect(() => {
         loadNotes()
@@ -33,7 +32,6 @@ export function NoteIndex() {
         return (
             <NoteEdit
                 onSaveNote={loadNotes}
-                onClose={() => navigate('/note')}
             />
         )
     }
@@ -43,10 +41,11 @@ export function NoteIndex() {
             .then(loadNotes)
     }
 
+
     return <section className="notes-container">
         <NoteHeader />
         <NoteAdd onAddNote={onAddNote} />
-        <NoteList notes={notes} onRemoveNote={onRemoveNote} />
+        <NoteList notes={notes} onRemoveNote={onRemoveNote}/>
         {getNoteEdit()}
     </section>
 }

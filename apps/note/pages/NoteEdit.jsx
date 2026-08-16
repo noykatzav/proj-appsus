@@ -3,7 +3,7 @@ const { useParams, useNavigate } = ReactRouterDOM
 
 import { noteService } from '../services/note.service.js'
 
-export function NoteEdit({ onSaveNote, onClose }) {
+export function NoteEdit({ onSaveNote }) {
     const [note, setNote] = useState(null)
     const textAreaRef = useRef(null)
 
@@ -51,7 +51,7 @@ export function NoteEdit({ onSaveNote, onClose }) {
     }
 
     if (!note) return null
-    return <div className="note-edit-backdrop" onClick={onClose}>
+    return <div className="note-edit-backdrop" onClick={onSave}>
         <div
             className="note-edit-modal"
             onClick={ev => ev.stopPropagation()}
