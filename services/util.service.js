@@ -6,6 +6,10 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
+    getUsFormatTime,
+    getUsFormatDate,
+    getFullDateTime,
+    isToday, 
     loadFromStorage,
     saveToStorage,
     getCurrentTimestamp
@@ -68,9 +72,57 @@ function getDayName(date, locale) {
 
 function getMonthName(date) {
     const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ]
+        "July", "August", "September", "October", "November", "December"]
+
     return monthNames[date.getMonth()]
+}
+
+function getUsFormatTime(timestamp) {
+    return new Date(timestamp).toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+    })
+}
+
+function getUsFormatDate(timestamp) {
+    const date = new Date(timestamp)
+    const currentYear = new Date().getFullYear()
+
+    const options = {
+        month: 'short',
+        day: '2-digit',
+    }
+
+    if (date.getFullYear() !== currentYear) {
+        options.year = 'numeric'
+    }
+
+    return new Intl.DateTimeFormat('en-US', options)
+        .format(date)
+        .replace(',', '')
+}
+
+function getFullDateTime(timestamp) {
+    return new Intl.DateTimeFormat('en-US', {
+        weekday: 'short',
+        month: 'short',
+        day: '2-digit',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+    }).format(new Date(timestamp))
+}
+
+function isToday(timestamp) {
+    const date = new Date(timestamp)
+    const now = new Date()
+
+    return (
+        date.getDate() === now.getDate() &&
+        date.getMonth() === now.getMonth() &&
+        date.getFullYear() === now.getFullYear()
+    )
 }
 
 function getCurrentTimestamp() {

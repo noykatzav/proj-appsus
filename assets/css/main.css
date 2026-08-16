@@ -15,8 +15,14 @@
 
 @import './apps/note/NoteIndex.css';
 @import './apps/mail/MailIndex.css';
+@import './apps/mail/MailMenu.css';
 @import './apps/mail/MailList.css';
 @import './apps/mail/MailHeader.css';
+@import './apps/mail/MailDetails.css';
+@import './apps/mail/MailDetActions.css';
+@import './apps/mail/MailDetHeader.css';
+@import './apps/mail/MailDetBody.css';
+@import './apps/mail/MailDetFooter.css';
 
 @import './apps/note/NoteHeader.css';
 @import './apps/note/NoteList.css';

@@ -1,0 +1,32 @@
+/* mail menu */
+
+.mail-menu {
+    display: grid;
+    place-items: start;
+
+    width: 95%;
+    margin-block-start: .5rem;
+    margin-inline: auto;
+}
+
+.mail-menu a {
+    width: 100%;
+}
+
+.mail-menu .category {
+    display: flex;
+    gap: .8rem;
+
+    align-items: center;
+    padding: 6px 18px;
+    
+    border-radius: 0 15px 15px 0;
+}
+
+.mail-menu .category > :last-child {
+    margin-inline-start: auto;
+}
+
+.category.chosen {
+    background-color: rgb(211, 227, 253);
+}

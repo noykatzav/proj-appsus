@@ -1,25 +1,26 @@
+import { utilService } from '../../../services/util.service.js'
+
+
 export function MailPreview({ mail, onSetMailRead }) {
-
-    function formatDate(timestamp) {
-        const date = new Date(timestamp)
-        const currentYear = new Date().getFullYear()
-
-        const options = {
-            day: '2-digit',
-            month: 'short',
-            ...(date.getFullYear() !== currentYear && { year: 'numeric' })
-        }
-
-        return date.toLocaleDateString('en-GB', options)
+   
+    function formatPreviewDate(timestamp) {
+        const isToday = utilService.isToday(timestamp)
+        
+        return isToday
+        ? utilService.getUsFormatTime(timestamp)
+        : utilService.getUsFormatDate(timestamp)
     }
 
-    var className = 'mail'
-    if (mail.isRead) className += ' read'
+    var mailClassName = 'mail'
+    var starClassName = 'fa-solid fa-star'
 	
-    return <tr key={mail.id} className={className} onClick={() => onSetMailRead(mail)}>
-        <td>{mail.isStarred}</td>
-        <td>{mail.from}</td>
-        <td>{mail.subject}</td>
-        <td>{mail.sentAt && formatDate(mail.sentAt)}</td>
-    </tr>
+    if (mail.isRead) mailClassName += ' read'
+    if (mail.isStarred) starClassName = "fa-regular fa-star"
+
+    return <div className={mailClassName} onClick={() => onSetMailRead(mail)}>
+            <button><i className={starClassName}></i></button>
+            <p>{mail.from}</p>
+            <p>{mail.subject}</p>
+            <p>{mail.sentAt && formatPreviewDate(mail.sentAt)}</p>
+        </div>
 }

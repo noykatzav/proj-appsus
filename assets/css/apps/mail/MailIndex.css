@@ -1,9 +1,11 @@
  /* mail index  */
 
-.mail-container {
+.mail-index {
+    height: calc(100vh - 16px - 16px - 42px);
+    
     display: grid;
     grid-template-columns: 1fr 6fr;
-    grid-template-rows: 5vh 95vh;
+    grid-template-rows: 10% 90%;
 
     background-color: var(--m-bg1);
     font-size: 0.875rem;
@@ -14,8 +16,4 @@
     gap: .2rem;
 
     padding: .4rem;
-}
-
-.mail-container table {
-    border-collapse: collapse;
 }

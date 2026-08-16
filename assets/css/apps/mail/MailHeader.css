@@ -3,11 +3,17 @@
 .mail-header {
     display: flex;
     gap: .2rem;
+    align-items: end;
 
     padding-top: .3rem;
     padding-left: 1rem;
 }
 
+.mail-header h1 {
+    margin: 0;
+}
+
 .mail-header img {
-    height: 85%;
+    height: 65%;
+    padding-bottom: .4rem;
 }

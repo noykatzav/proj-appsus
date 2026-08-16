@@ -1,24 +1,37 @@
 const { useState, useEffect } = React
+const { useSearchParams } = ReactRouterDOM
+
 
 import { MailList } from '../cmps/MailList.jsx'
 import { MailFilter } from '../cmps/MailFilter.jsx'
 import { MailMenu } from '../cmps/MailMenu.jsx'
 import { MailHeader } from '../cmps/MailHeader.jsx'
+import { utilService } from '../../../services/util.service.js'
 import { mailService } from '../services/mail.service.js'
+import { useEffectUpdate } from '../../../custom-hooks/useEffectUpdate.js'
+
 
 
 export function MailIndex() {
     const [mails, setMails] = useState([])
+
+    const [searchParams, setSearchParams] = useSearchParams()
     // const [ filterBy, setFilterBy ] = useState(mailService.getDefaultFilter())
-    const [filterBy, setFilterBy] = useState({})
+    const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchParams))
     const [sortBy, setsortBy] = useState(mailService.getDefaultSort())
+
 
     useEffect(() => {
         loadMails()
     }, [filterBy, sortBy])
 
+    useEffectUpdate(() => {
+		loadCars(filterBy)
+		setSearchParams(utilService.trimObj(filterBy))
+	}, [filterBy])
+
     function loadMails() {
-        return mailService.query({ filterBy, sortBy })
+        mailService.query({ filterBy, sortBy })
             .then(setMails)
     }
 
@@ -35,11 +48,12 @@ export function MailIndex() {
                     : mail
         )))
     }
+    
 
-    return <section className="mail-container">
+    return <section className="mail-index">
         <MailHeader />
         <MailFilter />
-        <MailMenu />
+        <MailMenu mails={mails} />
 
         <MailList
             mails={mails} 

@@ -3,3 +3,8 @@
     font-family: 'Google Sans';
     src: url(../../../fonts/google-sans/GoogleSans-Regular.ttf);
 }
+
+@font-face {
+    font-family: 'Google Sans Bold';
+    src: url(../../../fonts/google-sans/GoogleSans-SemiBold.ttf);
+}
