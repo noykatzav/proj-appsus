@@ -16,6 +16,10 @@ export const noteService = {
 
 function query() {
     return storageService.query(NOTE_KEY)
+        .then(notes => {
+            notes.sort((note1, note2) => note2.createdAt - note1.createdAt)
+            return notes
+        })
 }
 
 function get(noteId) {
