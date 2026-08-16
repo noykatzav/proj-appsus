@@ -21,7 +21,7 @@ export function NoteList({ notes, onRemoveNote }) {
                         type="button"
                         onClick={() => onRemoveNote(note.id)}
                     >
-                        <img src="imgs/trash.svg" alt="Delete" />
+                        <img src="assets/imgs/trash.svg" alt="Delete" title="Delete" />
                     </button>
                 </div>
             </div>
