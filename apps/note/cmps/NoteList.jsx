@@ -19,6 +19,7 @@ export function NoteList({ notes, onRemoveNote }) {
                 </Link>
 
                 <NoteActions
+                    actions={['delete']}
                     noteId={note.id}
                     onRemoveNote={onRemoveNote}
                 />
