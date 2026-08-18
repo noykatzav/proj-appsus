@@ -2,10 +2,11 @@
 
 .mail-list {
     display: grid;
-    grid-template-columns: 30px minmax(200px, 1fr) minmax(300px, 3fr) minmax(80px, 1fr);
+    grid-template-columns: 40px minmax(150px, 1fr) minmax(200px, 3fr) minmax(100px, 1fr);
 
     background-color: var(--m-bg2);
     border-radius: 20px;
+    overflow: hidden;
 }
 
 .mail-list ul {

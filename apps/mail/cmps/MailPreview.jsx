@@ -16,7 +16,7 @@ export function MailPreview({ mail, onSetMailRead, onSetMailUnread, onRemoveMail
 	
     if (mail.isRead) mailClassName += ' read'
     
-    if (mail.isStarred) starClassName += " fa-solid fa-star"
+    if (mail.isStarred) starClassName += " fa-solid fa-star" + " starred"
     else  starClassName += " fa-regular fa-star"
 
     return <div className={mailClassName} onClick={() => onSetMailRead(mail)}>

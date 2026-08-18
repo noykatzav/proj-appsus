@@ -1,5 +1,5 @@
 const { useState, useEffect } = React
-const { useParams } = ReactRouterDOM
+const { useParams, useNavigate } = ReactRouterDOM
 
 import { mailService } from '../services/mail.service.js'
 import { MailDetActions } from '../cmps/MailDetActions.jsx'
@@ -11,6 +11,7 @@ import { MailDetFooter } from '../cmps/MailDetFooter.jsx'
 export function MailDetails({ onSetMailUnread, onRemoveMail }) {
     const [ mail, setMail ] = useState(null)
 	const params = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
         mailService.get(params.id)
@@ -22,11 +23,13 @@ export function MailDetails({ onSetMailUnread, onRemoveMail }) {
         if (!mail.isRead) return 
         const mailId = mail.id        
 
-        return mailService.save({...mail, isRead: false})
+        mailService.save({...mail, isRead: false})
+            .then(() => navigate('/mail'))
     }
     
     function onRemoveMail(mailId) {
-        return mailService.remove(mailId)
+        mailService.remove(mailId)
+            .then(() => navigate('/mail'))
     }
             
     

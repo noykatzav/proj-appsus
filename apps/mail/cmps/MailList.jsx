@@ -1,4 +1,4 @@
-const { Link, useSearchParams } = ReactRouterDOM
+const { Link } = ReactRouterDOM
 
 import { MailPreview } from './MailPreview.jsx'
 
