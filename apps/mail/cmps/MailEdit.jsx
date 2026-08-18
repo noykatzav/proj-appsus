@@ -1,29 +1,58 @@
 const { useState } = React
 const { useNavigate } = ReactRouterDOM
 
+
+import { utilService } from '../../../services/util.service.js'
 import { Modal } from '../cmps/Modal.jsx'
 
-export function MailEdit({ onCloseCompose, isComposeShown,  getEmptyMail, save }) {
+export function MailEdit({ loggedUser, isComposeShown, onCloseCompose, getEmptyMail, save, showSuccessMsg }) {
     const [ mail, setMail ] = useState(getEmptyMail())
 
     const navigate = useNavigate()
 
     //(subject, body, isRead = true, sentAt = utilService.getCurrentTimestamp(), from, to, createdAt) 
 
-    function onSendMail() {
-        save(mail)
+    function onSendMail(ev) {
+        ev.preventDefault()
+
+        const formData = new FormData(ev.currentTarget)
+        console.log(Object.fromEntries(formData))
+        const { to, subject, body } = Object.fromEntries(formData)
+
+        const isRead = false
+        const from = loggedUser.email
+        const sentAt = utilService.getCurrentTimestamp()
+
+        const updatedMail = {
+            ...mail,
+            subject,
+            body,
+            isRead,
+            sentAt,
+            from,
+            to
+        }
+        setMail(updatedMail)
+
+        save(updatedMail)
             .then(mail => {
                 showSuccessMsg(`mail ${mail.id} sent`)
-                navigate('/mail')
+                onCloseCompose()
             })
     }
 
     return <Modal 
             isShown={isComposeShown} 
             onClose={onCloseCompose}
-            className="compose modal" >
+            className="mail-edit modal" >
 
-                <h2>Are you sure?</h2>
+            <form onSubmit={onSendMail}>
+                <input name="to" placeholder="To" />
+                <input name="subject" placeholder="Subject" />
+                <textarea name="body" placeholder="Write your message..."></textarea>
+
+                <button type="submit">Send</button>
+            </form>        
         </Modal>
 
     

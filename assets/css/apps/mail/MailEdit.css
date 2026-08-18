@@ -1,0 +1,6 @@
+.mail-edit textarea {
+    border: none;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+}

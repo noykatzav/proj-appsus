@@ -16,7 +16,7 @@ import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/async-storage.service.js'
 
 const MAIL_KEY = 'mailDB'
-const LoggedinUser = {
+const loggedUser = {
     email: 'noyk@appsus.com',
     fullname: 'Noy Katzav'
 }
@@ -26,6 +26,7 @@ _createMails()
 export const mailService = {
     query,
     get,
+    getLoggedUser,
     remove,
     save,
     getEmptyMail,
@@ -73,6 +74,10 @@ function get(mailId) {
             mail = _setNextPrevMailId(mail)
             return mail
         })
+}
+
+function getLoggedUser() {
+    return {...loggedUser}
 }
 
 function remove(mailId) {
@@ -459,7 +464,7 @@ const bodies = [
             const isStarred = booleanOptions[utilService.getRandomIntInclusive(0, booleanOptions.length - 1)]
             const sentAt = Date.now() - utilService.getRandomIntInclusive(0, 500) * 24 * 60 * 60 * 1000
             const from = users[utilService.getRandomIntInclusive(0, users.length - 1)].email
-            const to = LoggedinUser.email
+            const to = loggedUser.email
 
             mails.push(_createMail(subject, body, isRead, isStarred, sentAt, from, to))
         }                      

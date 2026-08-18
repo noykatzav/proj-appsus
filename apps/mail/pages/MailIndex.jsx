@@ -15,6 +15,7 @@ import { useEffectUpdate } from '../../../custom-hooks/useEffectUpdate.js'
 
 
 export function MailIndex() {
+    const loggedUser = mailService.getLoggedUser()
     const [mails, setMails] = useState([])
     const [ isComposeShown, setIsComposeShown ] = useState(false)
 
@@ -98,10 +99,12 @@ export function MailIndex() {
         />
         
         <MailEdit 
+            loggedUser={loggedUser}
             onCloseCompose={onCloseCompose}
             isComposeShown={isComposeShown}
             getEmptyMail={mailService.getEmptyMail}
             save={mailService.save} 
+            showSuccessMsg={showSuccessMsg}
         />
 
     </section>
