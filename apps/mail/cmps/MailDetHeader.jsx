@@ -12,9 +12,11 @@ export function MailDetHeader({ mail }) {
             : utilService.getFullDateTime(timestamp)
     }
 
-    var starClassName = 'fa-solid fa-star'
-    if (mail.isStarred) starClassName = "fa-regular fa-star"
-    
+    var starClassName = 'star'
+
+    if (mail.isStarred) starClassName += " fa-solid fa-star" + " starred"
+    else  starClassName += " fa-regular fa-star"
+
     return <header className="mail-det-header"> 
             <h1 className="title">{mail.subject}</h1>
             <span className="from">{`<${mail.from}>`}</span>

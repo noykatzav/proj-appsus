@@ -4,7 +4,7 @@
     height: calc(100vh - 16px - 16px - 42px);
     
     display: grid;
-    grid-template-columns: 1fr 6fr;
+    grid-template-columns: .8fr 6fr;
     grid-template-rows: 10% 90%;
 
     background-color: var(--m-bg1);
@@ -17,3 +17,4 @@
 
     padding: .4rem;
 }
+

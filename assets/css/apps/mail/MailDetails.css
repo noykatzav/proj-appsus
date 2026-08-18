@@ -39,5 +39,9 @@
 }
 
 .mail-details .star {
-    color: rgb(34, 34, 34);
+    color: var(--m-gray3);
+}
+
+.mail-details .star.starred {
+    color: rgb(255, 214, 109);
 }

@@ -33,7 +33,7 @@ export function MailDetails({ onSetMailUnread, onRemoveMail }) {
     }
             
     
-    if (!mail) return <section className="mail-details">
+    if (!mail) return <section className="mail-details-container">
             <div className="loader">
                 <img src="../../../assets/imgs/loader.svg" alt="A loader." />
             </div>

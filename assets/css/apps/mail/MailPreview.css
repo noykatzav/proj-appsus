@@ -20,7 +20,10 @@
 }
 
 .mail-preview:hover {
+    padding-block: 8px;
+
     cursor: pointer;
+    
     box-shadow: inset -1px 0 0 rgb(218, 220, 224), inset 1px 0 0 rgb(218, 220, 224), 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
     z-index: 2;
 }
@@ -34,10 +37,11 @@
 .mail-preview .mail-actions {
     display: none;
     gap: .5rem;
-    
 }
+
 .mail-preview .mail-actions button {
     padding: 0;
+    color: var(--m-gray4);
 }
 
 .mail-preview button {
@@ -54,10 +58,6 @@
 
 .mail-preview:hover .mail-actions {
     display: flex;
-}
-
-.mail-preview:hover {
-    padding-block: 8px;  
 }
 
 .mail-preview > :last-child {
