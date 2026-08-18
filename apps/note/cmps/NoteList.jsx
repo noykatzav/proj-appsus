@@ -1,3 +1,5 @@
+import { NoteActions } from '../cmps/NoteActions.jsx'
+
 const { Link } = ReactRouterDOM
 
 export function NoteList({ notes, onRemoveNote }) {
@@ -16,14 +18,11 @@ export function NoteList({ notes, onRemoveNote }) {
                     {note.info.txt}
                 </Link>
 
-                <div className="note-actions">
-                    <button
-                        type="button"
-                        onClick={() => onRemoveNote(note.id)}
-                    >
-                        <img src="assets/imgs/trash.svg" alt="Delete" title="Delete" />
-                    </button>
-                </div>
+                <NoteActions
+                    noteId={note.id}
+                    onRemoveNote={onRemoveNote}
+                />
+
             </div>
         ))}
     </section>
