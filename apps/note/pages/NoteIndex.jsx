@@ -1,12 +1,16 @@
 const { useState, useEffect } = React
+const { useParams, useNavigate } = ReactRouterDOM
 
 import { NoteList } from '../cmps/NoteList.jsx'
 import { NoteHeader } from '../cmps/NoteHeader.jsx'
+import { NoteAdd } from '../cmps/NoteAdd.jsx'
+import { NoteEdit } from './NoteEdit.jsx'
 import { noteService } from '../services/note.service.js'
 
 
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
+    const { noteId } = useParams()
 
     useEffect(() => {
         loadNotes()
@@ -17,8 +21,31 @@ export function NoteIndex() {
             .then(setNotes)
     }
 
+    function onAddNote(txt) {
+        const note = noteService.getEmptyNote(txt)
+        noteService.save(note)
+            .then(loadNotes)
+    }
+    function getNoteEdit() {
+        if (!noteId) return null
+
+        return (
+            <NoteEdit
+                onSaveNote={loadNotes}
+            />
+        )
+    }
+
+    function onRemoveNote(noteId) {
+        noteService.remove(noteId)
+            .then(loadNotes)
+    }
+
+
     return <section className="notes-container">
         <NoteHeader />
-        <NoteList notes={notes} />
+        <NoteAdd onAddNote={onAddNote} />
+        <NoteList notes={notes} onRemoveNote={onRemoveNote}/>
+        {getNoteEdit()}
     </section>
 }

@@ -8,14 +8,24 @@ _createNotes()
 
 export const noteService = {
     query,
+    get,
+    save,
+    remove,
     getEmptyNote
 }
 
 
 function query() {
     return storageService.query(NOTE_KEY)
+        .then(notes => {
+            notes.sort((note1, note2) => note2.createdAt - note1.createdAt)
+            return notes
+        })
 }
 
+function get(noteId) {
+    return storageService.get(NOTE_KEY, noteId)
+}
 
 function getEmptyNote(txt = '') {
     return {
@@ -54,6 +64,19 @@ function _createNote(txt) {
     note.id = utilService.makeId()
     return note
 }
+
+function save(note) {
+    if (note.id) {
+        return storageService.put(NOTE_KEY, note)
+    } else {
+        return storageService.post(NOTE_KEY, note)
+    }
+}
+
+function remove(noteId) {
+    return storageService.remove(NOTE_KEY, noteId)
+}
+
 
 
 // const notes = [
