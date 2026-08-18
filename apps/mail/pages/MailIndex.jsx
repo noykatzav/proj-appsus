@@ -6,6 +6,7 @@ import { MailList } from '../cmps/MailList.jsx'
 import { MailFilter } from '../cmps/MailFilter.jsx'
 import { MailMenu } from '../cmps/MailMenu.jsx'
 import { MailHeader } from '../cmps/MailHeader.jsx'
+import { MailEdit } from '../cmps/MailEdit.jsx'
 import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 import { utilService } from '../../../services/util.service.js'
 import { mailService } from '../services/mail.service.js'
@@ -15,6 +16,7 @@ import { useEffectUpdate } from '../../../custom-hooks/useEffectUpdate.js'
 
 export function MailIndex() {
     const [mails, setMails] = useState([])
+    const [ isComposeShown, setIsComposeShown ] = useState(false)
 
     const [searchParams, setSearchParams] = useSearchParams()
     // const [ filterBy, setFilterBy ] = useState(mailService.getDefaultFilter())
@@ -71,12 +73,22 @@ export function MailIndex() {
 			})
 			.catch(err => showErrorMsg(`Couldn't remove ${mailId}`))
 	}
+
+    function onOpenCompose() {
+        console.log('Modal has opened...')
+        setIsComposeShown(true)
+    }
+
+    function onCloseCompose() {
+        console.log('Modal has closed...')
+        setIsComposeShown(false)
+    }
     
 
     return <section className="mail-index">
         <MailHeader />
         <MailFilter />
-        <MailMenu mails={mails} />
+        <MailMenu mails={mails} onOpenCompose={onOpenCompose} />
 
         <MailList
             mails={mails} 
@@ -84,6 +96,14 @@ export function MailIndex() {
             onSetMailUnread={onSetMailUnread}
             onRemoveMail={onRemoveMail}
         />
+        
+        <MailEdit 
+            onCloseCompose={onCloseCompose}
+            isComposeShown={isComposeShown}
+            getEmptyMail={mailService.getEmptyMail}
+            save={mailService.save} 
+        />
+
     </section>
 }
 

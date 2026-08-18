@@ -33,6 +33,7 @@ export const mailService = {
     getDefaultSort,
     getFilterFromSearchParams
 }
+
 // For Debug (easy access from console):
 window.ms = mailService
 
