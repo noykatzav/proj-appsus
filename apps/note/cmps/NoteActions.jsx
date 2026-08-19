@@ -2,13 +2,13 @@ import { ColorPicker } from './ColorPicker.jsx'
 
 const { useState } = React
 
-export function NoteActions({ actions, noteId, selectedColor, onRemoveNote, onSetStyle }) {
+export function NoteActions({ actions, noteId, isColorOpen, onToggleColor, selectedColor, onRemoveNote, onSetStyle }) {
 
-    const [isColorOpen, setIsColorOpen] = useState(false)
+    // const [isColorOpen, setIsColorOpen] = useState(false)
 
-    function onToggleColor() {
-        setIsColorOpen(prevIsOpen => !prevIsOpen)
-    }
+    // function onToggleColor() {
+    //     setIsColorOpen(prevIsOpen => !prevIsOpen)
+    // }
 
     function getActionButton(action) {
         switch (action) {
