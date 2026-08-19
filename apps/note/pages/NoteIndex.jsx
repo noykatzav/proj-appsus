@@ -5,19 +5,29 @@ import { NoteList } from '../cmps/NoteList.jsx'
 import { NoteHeader } from '../cmps/NoteHeader.jsx'
 import { NoteAdd } from '../cmps/NoteAdd.jsx'
 import { NoteEdit } from './NoteEdit.jsx'
+import { NoteFilter } from '../cmps/NoteFilter.jsx'
 import { noteService } from '../services/note.service.js'
+import { useEffectUpdate } from '../custom-hooks/useEffectUpdate.js'
+
 
 
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
     const { noteId } = useParams()
+	const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
+
 
     useEffect(() => {
-        loadNotes()
+        loadNotes(filterBy)
     }, [])
 
+    	useEffectUpdate(() => {
+		loadNotes(filterBy)
+	},[filterBy])
+
+
     function loadNotes() {
-        noteService.query()
+        noteService.query(filterBy)
             .then(setNotes)
     }
 
@@ -59,5 +69,6 @@ export function NoteIndex() {
         <NoteAdd onAddNote={onAddNote} />
         <NoteList notes={notes} onRemoveNote={onRemoveNote} onSetNotesStyle={onSetNotesStyle} />
         {getNoteEdit()}
+        <NoteFilter filterBy={filterBy} onSetFilterBy={setFilterBy}/>
     </section>
 }

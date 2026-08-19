@@ -11,13 +11,18 @@ export const noteService = {
     get,
     save,
     remove,
-    getEmptyNote
+    getEmptyNote,
+    getDefaultFilter
 }
 
 
-function query() {
+function query(filterBy = {}) {
     return storageService.query(NOTE_KEY)
         .then(notes => {
+            if (filterBy.txt) {
+                const regExp = new RegExp(filterBy.txt, 'i')
+                notes = notes.filter(note => regExp.test(note.info.txt))
+            }
             notes.sort((note1, note2) => note2.createdAt - note1.createdAt)
             return notes
         })
@@ -75,6 +80,13 @@ function save(note) {
 
 function remove(noteId) {
     return storageService.remove(NOTE_KEY, noteId)
+}
+
+function getDefaultFilter() {
+    return {
+        txt: '',
+        type: ''
+    }
 }
 
 
