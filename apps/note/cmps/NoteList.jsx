@@ -1,8 +1,8 @@
-import { NoteActions } from '../cmps/NoteActions.jsx'
+import { NoteActions } from './NoteActions.jsx'
 
 const { Link } = ReactRouterDOM
 
-export function NoteList({ notes, onRemoveNote }) {
+export function NoteList({ notes, onRemoveNote, onSetNotesStyle }) {
     return <section className="note-list">
         {notes.map(note => (
             <div
@@ -19,9 +19,11 @@ export function NoteList({ notes, onRemoveNote }) {
                 </Link>
 
                 <NoteActions
-                    actions={['delete']}
+                    actions={['color','delete']}
                     noteId={note.id}
+                    selectedColor={note.style.backgroundColor}
                     onRemoveNote={onRemoveNote}
+                    onSetStyle={(style) => onSetNotesStyle(note,style)}
                 />
 
             </div>

@@ -41,11 +41,23 @@ export function NoteIndex() {
             .then(loadNotes)
     }
 
+    function onSetNotesStyle(note, style) {
+        const updatedNote = {
+            ...note,
+            style: {
+                ...note.style,
+                ...style
+            }
+        }
+
+        noteService.save(updatedNote)
+            .then(loadNotes)
+    }
 
     return <section className="notes-container">
         <NoteHeader />
         <NoteAdd onAddNote={onAddNote} />
-        <NoteList notes={notes} onRemoveNote={onRemoveNote}/>
+        <NoteList notes={notes} onRemoveNote={onRemoveNote} onSetNotesStyle={onSetNotesStyle} />
         {getNoteEdit()}
     </section>
 }

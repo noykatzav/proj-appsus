@@ -29,3 +29,5 @@
 @import './apps/note/NoteList.css';
 @import './apps/note/NoteAdd.css';
 @import './apps/note/NoteEdit.css';
+@import './apps/note/ColorPicker.css';
+@import './apps/note/NoteActions.css';

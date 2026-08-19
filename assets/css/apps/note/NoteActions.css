@@ -1,0 +1,42 @@
+ .note-actions{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: auto;
+    margin-left: -8px;
+    opacity: 0;
+ }
+
+ .note-preview:hover .note-actions{
+    opacity: 1;
+ }
+
+ .note-actions button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    border-radius: 50%;
+
+    cursor: pointer;
+
+ }
+
+  .note-actions button:hover{
+    background-color: var(--not-actions-hover);
+  }
+
+ .note-actions img{
+    width: 18px;
+    height: 18px;
+ }
+
+ /* .note-actions-container {
+     position: relative;
+ } */
