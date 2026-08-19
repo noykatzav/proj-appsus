@@ -37,7 +37,9 @@ export function NoteActions({ actions, noteId, isColorOpen, onToggleColor, selec
     }
 
 
-    return <div className="note-actions-container">
+    return <div className="note-actions-container"
+        onClick={ev => ev.stopPropagation()}
+    >
         <div className="note-actions">
             {actions.map(action => getActionButton(action))}
         </div>

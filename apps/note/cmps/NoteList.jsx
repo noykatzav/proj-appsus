@@ -1,17 +1,28 @@
-const {useState} = React
+const { useState, useEffect } = React
 const { Link } = ReactRouterDOM
 
 import { NoteActions } from './NoteActions.jsx'
 
 export function NoteList({ notes, onRemoveNote, onSetNotesStyle }) {
 
-const[openColorNoteId, setOpenColorNoteId] = useState(null)
+    const [openColorNoteId, setOpenColorNoteId] = useState(null)
 
-function onToggleColor(noteId){
-    setOpenColorNoteId(prevNoteId =>
-        prevNoteId === noteId ? null : noteId
-    )
-}
+    function onToggleColor(noteId) {
+        setOpenColorNoteId(prevNoteId =>
+            prevNoteId === noteId ? null : noteId
+        )
+    }
+
+    useEffect(() => {
+        function onCllickOutside() {
+            setOpenColorNoteId(null)
+        }
+
+        document.addEventListener('click', onCllickOutside)
+        return () => {
+            document.removeEventListener('click', onCllickOutside)
+        }
+    }, [])
 
     return <section className="note-list">
         {notes.map(note => (
@@ -29,13 +40,13 @@ function onToggleColor(noteId){
                 </Link>
 
                 <NoteActions
-                    actions={['color','delete']}
+                    actions={['color', 'delete']}
                     noteId={note.id}
                     isColorOpen={openColorNoteId === note.id}
-                    onToggleColor={()=>onToggleColor(note.id)}
+                    onToggleColor={() => onToggleColor(note.id)}
                     selectedColor={note.style.backgroundColor}
                     onRemoveNote={onRemoveNote}
-                    onSetStyle={(style) => onSetNotesStyle(note,style)}
+                    onSetStyle={(style) => onSetNotesStyle(note, style)}
                 />
 
             </div>
