@@ -7,7 +7,7 @@ import { NoteAdd } from '../cmps/NoteAdd.jsx'
 import { NoteEdit } from './NoteEdit.jsx'
 import { NoteFilter } from '../cmps/NoteFilter.jsx'
 import { noteService } from '../services/note.service.js'
-import { useEffectUpdate } from '../custom-hooks/useEffectUpdate.js'
+import { useEffectUpdate } from '../../../custom-hooks/useEffectUpdate.js'
 
 
 
