@@ -6,7 +6,8 @@
 
     padding: 0 8px;
 
-    border-bottom: 1px solid #dadce0;
+    /* border-bottom: 1px solid #dadce0; */
+    flex-shrink: 0;
 }
 
 .note-header h1 {

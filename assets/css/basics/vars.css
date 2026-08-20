@@ -27,7 +27,10 @@
 
     /* not app */
     --logo-text: #1f1f1f;
+    --search-text: #444746;
     --note-border: #e0e0e0;
     --note-bg: #fff;
     --not-actions-hover: #EAEBEB;
+    --search-container: #f0f4f9;
+    --search-focus:#f0f4f9;
 }

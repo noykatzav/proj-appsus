@@ -14,16 +14,16 @@ import { useEffectUpdate } from '../custom-hooks/useEffectUpdate.js'
 export function NoteIndex() {
     const [notes, setNotes] = useState([])
     const { noteId } = useParams()
-	const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
+    const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
 
 
     useEffect(() => {
         loadNotes(filterBy)
     }, [])
 
-    	useEffectUpdate(() => {
-		loadNotes(filterBy)
-	},[filterBy])
+    useEffectUpdate(() => {
+        loadNotes(filterBy)
+    }, [filterBy])
 
 
     function loadNotes() {
@@ -65,10 +65,14 @@ export function NoteIndex() {
     }
 
     return <section className="notes-container">
-        <NoteHeader />
+        <div className="note-top-bar">
+            <NoteHeader />
+            <NoteFilter filterBy={filterBy} onSetFilterBy={setFilterBy} />
+        </div>
+
         <NoteAdd onAddNote={onAddNote} />
         <NoteList notes={notes} onRemoveNote={onRemoveNote} onSetNotesStyle={onSetNotesStyle} />
         {getNoteEdit()}
-        <NoteFilter filterBy={filterBy} onSetFilterBy={setFilterBy}/>
+        
     </section>
 }
