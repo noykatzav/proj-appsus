@@ -7,6 +7,7 @@ export function NoteAdd({ onAddNote }) {
     const [info, setInfo] = useState({ txt: '' })
     const [isExpanded, setIsExpanded] = useState(false)
     const textareaRef = useRef(null)
+    const [noteType, setNoteType] = useState('NoteTxt')
 
     function handleChange({ target }) {
         const field = target.name
@@ -34,9 +35,13 @@ export function NoteAdd({ onAddNote }) {
         const reader = new FileReader()
 
         reader.onload = () => {
-            console.log(reader.result)
-            setIsExpanded(true)
+            setNoteType('NoteImg')
+            setInfo(prevInfo => ({
+                ...prevInfo,
+                url: reader.result
+            }))
 
+            setIsExpanded(true)
         }
         reader.readAsDataURL(file)
     }
@@ -51,6 +56,14 @@ export function NoteAdd({ onAddNote }) {
             onChange={handleChange}
             onFocus={() => setIsExpanded(true)}
         />
+
+        {noteType === 'NoteImg' && info.url &&
+            <img
+                className="note-add-img"
+                src={info.url}
+                alt=""
+            />
+        }
 
         {!isExpanded &&
             <NoteActions

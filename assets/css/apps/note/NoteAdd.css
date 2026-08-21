@@ -114,3 +114,12 @@
     width: auto;
     margin-top: 8px;
 }
+
+
+.note-add-img {
+    width: 100%;
+    max-height: 300px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}

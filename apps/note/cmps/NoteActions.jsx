@@ -68,7 +68,7 @@ export function NoteActions({
         }
     }
 
-    function handleImgUpload(ev) {
+    function handleFileChange(ev) {
         const file = ev.target.files[0]
 
         if (!file) return
@@ -87,7 +87,7 @@ export function NoteActions({
             type="file"
             accept="image/*"
             hidden
-            onChange={handleImgUpload}
+            onChange={handleFileChange}
         />
 
         {isColorOpen
