@@ -23,10 +23,12 @@ export function NoteAdd({ onAddNote }) {
     }
 
     function onSaveNote() {
-        if (!info.txt.trim()) return
+        if (noteType === 'Notetxt' && !info.txt.trim()) return
+        if (noteType ==='NoteImg' && !info.url) return
 
-        onAddNote(info.txt)
+        onAddNote(noteType, info)
         setInfo({ txt: '' })
+        setNoteType(Notetxt)
         setIsExpanded(false)
         textareaRef.current.style.height = '50px'
     }

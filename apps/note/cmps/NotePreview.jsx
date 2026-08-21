@@ -1,13 +1,17 @@
 import { NoteTxt } from './NoteTxt.jsx';
+import { NoteImg } from './NoteImg.jsx'
 
-export function NotePreview({note}){
+export function NotePreview({ note }) {
 
-    switch(note.type){
-case 'NoteTxt':
-    return <NoteTxt info={note.info} />
+    switch (note.type) {
+        case 'NoteTxt':
+            return <NoteTxt info={note.info} />
 
-    default:
-        return null
-        
+        case 'NoteImg':
+            return <NoteImg info={note.info} />
+
+        default:
+            return null
+
     }
 }

@@ -33,11 +33,17 @@ export function NoteIndex() {
             .then(setNotes)
     }
 
-    function onAddNote(txt) {
-        const note = noteService.getEmptyNote(txt)
+    function onAddNote(type, info) {
+        const note = noteService.getEmptyNote()
+
+        note.type = type
+        note.info = info
+
         noteService.save(note)
             .then(loadNotes)
     }
+
+
     function getNoteEdit() {
         if (!noteId) return null
 
@@ -95,7 +101,7 @@ export function NoteIndex() {
         </div>
 
         <NoteAdd onAddNote={onAddNote} />
-        <NoteList notes={notes} onRemoveNote={onRemoveNote} onSetNotesStyle={onSetNotesStyle} onTogglePin={onTogglePin} onDuplicateNote={onDuplicateNote}/>
+        <NoteList notes={notes} onRemoveNote={onRemoveNote} onSetNotesStyle={onSetNotesStyle} onTogglePin={onTogglePin} onDuplicateNote={onDuplicateNote} />
         {getNoteEdit()}
 
     </section>
