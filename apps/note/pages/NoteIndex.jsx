@@ -8,6 +8,8 @@ import { NoteEdit } from './NoteEdit.jsx'
 import { NoteFilter } from '../cmps/NoteFilter.jsx'
 import { noteService } from '../services/note.service.js'
 import { useEffectUpdate } from '../../../custom-hooks/useEffectUpdate.js'
+import { utilService } from '../../../services/util.service.js'
+
 
 
 
@@ -67,7 +69,8 @@ export function NoteIndex() {
     function onTogglePin(note) {
         const updatedNote = {
             ...note,
-            isPinned: !note.isPinned
+            isPinned: !note.isPinned,
+            pinnedAt: !note.isPinned ? utilService.getCurrentTimestamp() : null
         }
         noteService.save(updatedNote)
             .then(loadNotes)

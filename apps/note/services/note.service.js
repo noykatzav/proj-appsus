@@ -32,9 +32,12 @@ function query(filterBy = {}) {
                 if(note1.isPinned && !note2.isPinned) return -1
                 if(!note1.isPinned && note2.isPinned) return 1
 
-                note2.createdAt - note1.createdAt
+               if(note1.isPinned && note2.isPinned){
+                return (note2.pinnedAt || 0) - (note1.pinnedAt || 0)
+               }
+                  return note2.createdAt - note1.createdAt
         })
-             return notes
+          return notes
     })
 }
 
