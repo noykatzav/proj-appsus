@@ -1,13 +1,22 @@
  /* mail list */
 
+.mail-list-container {
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 0 1rem 1rem 1rem;
+    
+    background-color: var(--m-bg2);
+}
+
 .mail-list {
     display: grid;
     grid-template-columns: 40px minmax(150px, 1fr) minmax(200px, 3fr) minmax(100px, 1fr);
 
-    background-color: var(--m-bg2);
-    border-radius: 20px;
-    overflow: hidden;
+    
+    max-height: 85vh;
+    overflow-y: auto;
 }
+
 
 .mail-list ul {
     display: grid;

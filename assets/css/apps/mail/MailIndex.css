@@ -1,7 +1,7 @@
  /* mail index  */
 
 .mail-index {
-    height: calc(100vh - 16px - 16px - 42px);
+    height: calc(100vh - 8px - 8px - 47px);
     
     display: grid;
     grid-template-columns: .8fr 6fr;
