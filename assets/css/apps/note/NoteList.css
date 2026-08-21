@@ -12,7 +12,7 @@
         justify-content: center;
         align-items: start; */
      columns: 6 240px;
-    /* column-count: 6; */
+     /* column-count: 6; */
      column-gap: 16px;
      margin-top: 24px;
      padding: 0 32px;
@@ -47,38 +47,47 @@
      display: flex;
      flex-direction: column;
      /* justify-content: space-between; */
-      min-height: 104px;
-    gap: 12px; 
-   position: relative;
-   
-   }
+     min-height: 104px;
+     gap: 12px;
+     position: relative;
 
-.note-content{
-    flex-grow: 1;
-    color: inherit;
-    text-decoration: none;
-    overflow-wrap: anywhere;
-}
+ }
 
-.btn-pin {
-    position: absolute;
-    top: 8px;
-    right: 8px;
+ .note-content {
+     flex-grow: 1;
+     color: inherit;
+     text-decoration: none;
+     overflow-wrap: anywhere;
+ }
 
-    width: 28px;
-    height: 28px;
+ .btn-pin {
+     position: absolute;
+     top: 8px;
+     right: 8px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+     width: 34px;
+     height: 34px;
 
-    border: none;
-    border-radius: 50%;
-    background: transparent;
-    cursor: pointer;
-    opacity: 0;
-}
+     display: flex;
+     align-items: center;
+     justify-content: center;
 
- .note-preview:hover .btn-pin{
-    opacity: 1;
+     border: none;
+     border-radius: 50%;
+     background: transparent;
+     cursor: pointer;
+     opacity: 0;
+ }
+
+ .btn-pin img {
+     width: 24px;
+     height: 24px;
+ }
+
+ .btn-pin:hover {
+     background-color: var(--not-actions-hover);
+ }
+
+ .note-preview:hover .btn-pin {
+     opacity: 1;
  }
