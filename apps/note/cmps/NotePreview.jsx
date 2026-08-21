@@ -1,5 +1,6 @@
 import { NoteTxt } from './NoteTxt.jsx';
 import { NoteImg } from './NoteImg.jsx'
+import { NoteVideo } from './NoteVideo.jsx'
 
 export function NotePreview({ note }) {
 
@@ -9,6 +10,9 @@ export function NotePreview({ note }) {
 
         case 'NoteImg':
             return <NoteImg info={note.info} />
+
+        case 'NoteVideo':
+            return <NoteVideo info={note.info} />
 
         default:
             return null

@@ -1,4 +1,5 @@
 import { NoteActions } from "./NoteActions.jsx"
+import { NoteVideo } from './NoteVideo.jsx'
 
 const { useState, useRef } = React
 
@@ -27,6 +28,10 @@ export function NoteAdd({ onAddNote }) {
             onAddNote(noteType, info)
         }
         if (noteType === 'NoteImg' && info.url) {
+            onAddNote(noteType, info)
+        }
+
+        if (noteType === 'NoteVideo' && info.url) {
             onAddNote(noteType, info)
         }
 
@@ -67,20 +72,6 @@ export function NoteAdd({ onAddNote }) {
         }))
     }
 
-    function getYoutubeEmbedUrl(url) {
-        let videoId
-
-        if (url.includes('youtu.be/')) {
-            videoId = url.split('youtu.be/')[1].split('?')[0]
-        } else if (url.includes('v=')) {
-            videoId = url.split('v=')[1].split('&')[0]
-        }
-
-        if (!videoId) return ''
-
-        return `https://www.youtube.com/embed/${videoId}`
-    }
-
     return <section className={`note-add ${isExpanded ? 'expanded' : ''}`}>
         <textarea
             ref={textareaRef}
@@ -101,12 +92,8 @@ export function NoteAdd({ onAddNote }) {
                     onChange={handleVideoChange}
                 />
 
-                {getYoutubeEmbedUrl(info.url || '') &&
-                    <iframe
-                        src={getYoutubeEmbedUrl(info.url)}
-                        title="YouTube video"
-                        allowFullScreen
-                    ></iframe>
+                {info.url &&
+                    <NoteVideo info={info} />
                 }
             </div>
         }

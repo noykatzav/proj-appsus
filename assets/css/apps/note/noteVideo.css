@@ -1,0 +1,13 @@
+.note-video iframe {
+    display: block;
+
+    width: calc(100% + 32px);
+    max-width: none;
+    aspect-ratio: 16 / 9;
+
+    margin-top: -16px;
+    margin-left: -16px;
+
+    border: none;
+    border-radius: 8px 8px 0 0;
+}
