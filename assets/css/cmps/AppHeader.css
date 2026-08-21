@@ -1,16 +1,32 @@
 .app-header {
     display: flex;
     justify-content: space-between;
-    padding: 1em;
-    background: var(--bg1);
+    align-items: center;
+    padding-block: .5em;
+    padding-inline: 1em;
+    background: var(--bg2);
+    
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.app-header h3 {
+    font-size: 1.7em;
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    align-items: center;
 }
 
 nav a {
     margin: .5em;
+    font-size: 1.1em;
+    
 }
 
 nav a.active {
     color: var(--color1);
     font-weight: bold;
-    text-decoration: overline;
+    font-size: 1.3em;
 }
