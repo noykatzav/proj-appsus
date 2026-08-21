@@ -16,8 +16,9 @@ export function MailEdit({ loggedUser, isComposeShown, onCloseCompose, getEmptyM
         ev.preventDefault()
 
         const formData = new FormData(ev.currentTarget)
-        console.log(Object.fromEntries(formData))
         const { to, subject, body } = Object.fromEntries(formData)
+
+        if (!to || !subject) return 
 
         const isRead = true
         const from = loggedUser.email
@@ -36,7 +37,7 @@ export function MailEdit({ loggedUser, isComposeShown, onCloseCompose, getEmptyM
 
         save(updatedMail)
             .then(mail => {
-                setMails(prev => [mail, ...prev, mail])
+                setMails(prev => [mail, ...prev])
                 showSuccessMsg(`mail ${mail.id} sent`)
                 onCloseCompose()
             })
