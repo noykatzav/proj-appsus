@@ -1,0 +1,38 @@
+ /* mail filter  */
+
+.mail-filter {
+    place-self: end start;
+    padding-inline: 1.5rem;
+
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+
+    height: 60%;
+    width: 60%;
+
+    background-color: var(--m-bg4);
+    color: var(--m-gray4);
+    border-radius: 30px;
+    font-size: 1rem;
+}
+
+input:focus {
+    outline: none;
+}
+
+.mail-filter input {
+    height: 100%;
+
+    background-color: transparent;
+    border: none;
+}
+
+.mail-filter .btn-clear {
+    margin-left: auto;
+
+    border: none;
+    
+    background-color: transparent;
+    color: rgb(68, 68, 68);
+}

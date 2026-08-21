@@ -3,7 +3,7 @@
 .mail-list-container {
     border-radius: 20px;
     overflow: hidden;
-    margin: 0 1rem 1rem 1rem;
+    margin-bottom: 1rem;
     
     background-color: var(--m-bg2);
 }

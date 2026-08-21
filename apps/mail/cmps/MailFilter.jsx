@@ -19,6 +19,7 @@ export function MailFilter({ filterBy, setFilterBy, defaultFilter}) {
     }
 
 	return <section className="mail-filter">
+        <i className="fa-solid fa-magnifying-glass"></i>
         <input 
             onChange={ev => handleChange(ev)} 
             value={filterByToEdit.txt} 
@@ -26,6 +27,6 @@ export function MailFilter({ filterBy, setFilterBy, defaultFilter}) {
             name="txt" 
             placeholder="Search mail" />
 
-        <button onClick={clearFilter}>Clear</button>
+        <button className="btn-clear" onClick={clearFilter}>x</button>
     </section>
 }
