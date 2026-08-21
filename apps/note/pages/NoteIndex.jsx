@@ -64,6 +64,15 @@ export function NoteIndex() {
             .then(loadNotes)
     }
 
+    function onTogglePin(note) {
+        const updatedNote = {
+            ...note,
+            isPinned: !note.isPinned
+        }
+        noteService.save(updatedNote)
+            .then(loadNotes)
+    }
+
     return <section className="notes-container">
         <div className="note-top-bar">
             <NoteHeader />
@@ -71,8 +80,8 @@ export function NoteIndex() {
         </div>
 
         <NoteAdd onAddNote={onAddNote} />
-        <NoteList notes={notes} onRemoveNote={onRemoveNote} onSetNotesStyle={onSetNotesStyle} />
+        <NoteList notes={notes} onRemoveNote={onRemoveNote} onSetNotesStyle={onSetNotesStyle} onTogglePin={onTogglePin} />
         {getNoteEdit()}
-        
+
     </section>
 }

@@ -3,7 +3,7 @@ const { Link } = ReactRouterDOM
 
 import { NoteActions } from './NoteActions.jsx'
 
-export function NoteList({ notes, onRemoveNote, onSetNotesStyle }) {
+export function NoteList({ notes, onRemoveNote, onSetNotesStyle, onTogglePin }) {
 
     const [openColorNoteId, setOpenColorNoteId] = useState(null)
 
@@ -31,6 +31,14 @@ export function NoteList({ notes, onRemoveNote, onSetNotesStyle }) {
                 key={note.id}
                 style={note.style}
             >
+
+                <button className="btn-pin"
+                    type="button"
+                    title="Pin note"
+                    onClick={()=>onTogglePin(note)}>
+                        
+                    <img src="assets/imgs/pin.svg" alt="" />
+                </button>
 
                 <Link
                     to={`/note/edit/${note.id}`}
