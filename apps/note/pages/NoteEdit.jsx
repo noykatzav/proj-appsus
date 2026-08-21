@@ -50,6 +50,20 @@ export function NoteEdit({ onSaveNote }) {
             })
     }
 
+    function getYoutubeEmbedUrl(url) {
+        let videoId
+
+        if (url.includes('youtu.be/')) {
+            videoId = url.split('youtu.be/')[1].split('?')[0]
+        } else if (url.includes('v=')) {
+            videoId = url.split('v=')[1].split('&')[0]
+        }
+
+        if (!videoId) return ''
+
+        return `https://www.youtube.com/embed/${videoId}`
+    }
+
     if (!note) return null
     return <div className="note-edit-backdrop" onClick={onSave}>
         <div
@@ -65,6 +79,14 @@ export function NoteEdit({ onSaveNote }) {
                 />
             }
 
+            {note.type === 'NoteVideo' && note.info.url &&
+                <iframe
+                    className="note-edit-video"
+                    src={getYoutubeEmbedUrl(note.info.url)}
+                    title="YouTube video"
+                    allowFullScreen
+                ></iframe>
+            }
             <textarea
                 className="note-edit-textarea"
                 ref={textAreaRef}

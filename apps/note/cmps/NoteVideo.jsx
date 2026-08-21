@@ -24,5 +24,9 @@ export function NoteVideo({ info }) {
             title="YouTube video"
             allowFullScreen
         ></iframe>
+
+        {info.txt &&
+            <p>{info.txt}</p>
+        }
     </div>
 }
