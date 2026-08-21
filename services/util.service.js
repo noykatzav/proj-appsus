@@ -12,7 +12,8 @@ export const utilService = {
     isToday, 
     loadFromStorage,
     saveToStorage,
-    getCurrentTimestamp
+    getCurrentTimestamp,
+    trimObj
 }
 
 function saveToStorage(key, val) {
@@ -127,4 +128,13 @@ function isToday(timestamp) {
 
 function getCurrentTimestamp() {
     return Date.now()
+}
+
+function trimObj(obj) {
+    const trimmedObj = {}
+
+    for (const key in obj) {
+        if (obj[key]) trimmedObj[key] = obj[key]
+    }
+    return trimmedObj
 }
