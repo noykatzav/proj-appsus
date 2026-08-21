@@ -76,6 +76,18 @@ export function NoteIndex() {
             .then(loadNotes)
     }
 
+    function onDuplicateNote(note) {
+        const duplicateNote = {
+            ...note,
+            id: '',
+            createdAt: utilService.getCurrentTimestamp(),
+            isPinned: false,
+            pinnedAt: null
+        }
+        noteService.save(duplicateNote)
+            .then(loadNotes)
+    }
+
     return <section className="notes-container">
         <div className="note-top-bar">
             <NoteHeader />
@@ -83,7 +95,7 @@ export function NoteIndex() {
         </div>
 
         <NoteAdd onAddNote={onAddNote} />
-        <NoteList notes={notes} onRemoveNote={onRemoveNote} onSetNotesStyle={onSetNotesStyle} onTogglePin={onTogglePin} />
+        <NoteList notes={notes} onRemoveNote={onRemoveNote} onSetNotesStyle={onSetNotesStyle} onTogglePin={onTogglePin} onDuplicateNote={onDuplicateNote}/>
         {getNoteEdit()}
 
     </section>

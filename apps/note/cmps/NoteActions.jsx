@@ -2,7 +2,7 @@ import { ColorPicker } from './ColorPicker.jsx'
 
 const { useState } = React
 
-export function NoteActions({ actions, noteId, isColorOpen, onToggleColor, selectedColor, onRemoveNote, onSetStyle }) {
+export function NoteActions({ actions, noteId, isColorOpen, onToggleColor, selectedColor, onRemoveNote, onSetStyle ,onDuplicateNote }) {
 
     // const [isColorOpen, setIsColorOpen] = useState(false)
 
@@ -28,6 +28,16 @@ export function NoteActions({ actions, noteId, isColorOpen, onToggleColor, selec
                     onClick={onToggleColor}
                 >
                     <img src="assets/imgs/color_icon.svg" alt="color" title="Background Color" />
+
+                </button>
+
+            case 'duplicate':
+                return <button
+                    key={action}
+                    type="button"
+                    onClick={onDuplicateNote}
+                >
+                    <img src="assets/imgs/duplicate.png" alt="color" title="Duplicate note" />
                 </button>
 
             default:
