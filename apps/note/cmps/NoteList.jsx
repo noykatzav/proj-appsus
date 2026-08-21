@@ -56,7 +56,7 @@ export function NoteList({ notes, onRemoveNote, onSetNotesStyle, onTogglePin, on
                 </Link>
 
                 <NoteActions
-                    actions={['color','duplicate','image', 'delete']}
+                    actions={['color','duplicate', 'delete']}
                     noteId={note.id}
                     isColorOpen={openColorNoteId === note.id}
                     onToggleColor={() => onToggleColor(note.id)}

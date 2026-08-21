@@ -1,3 +1,5 @@
+import { NoteActions } from "./NoteActions.jsx"
+
 const { useState } = React
 
 export function NoteAdd({ onAddNote }) {
@@ -23,17 +25,31 @@ export function NoteAdd({ onAddNote }) {
         setInfo({ txt: '' })
     }
 
-    return  <section className="note-add">
-            <textarea
-                name="txt"
-                value={info.txt}
-                placeholder="Take a note..."
-                onChange={handleChange}
-            />
+    function handleImgUpload(file) {
+        const reader = new FileReader()
 
-            <button className="note-close-btn" onClick={onSaveNote}>
-                Done
-            </button>
-        </section>
+        reader.onload = () => {
+            console.log(reader.result)
+        }
+        reader.readAsDataURL(file)
+    }
+
+    return <section className="note-add">
+        <textarea
+            name="txt"
+            value={info.txt}
+            placeholder="Take a note..."
+            onChange={handleChange}
+        />
+
+        <NoteActions
+            actions={['image']}
+            onImgUpload={handleImgUpload}
+        />
+
+        <button className="note-close-btn" onClick={onSaveNote}>
+            Done
+        </button>
+    </section>
 }
 

@@ -3,7 +3,17 @@ import { ColorPicker } from './ColorPicker.jsx'
 const { useState } = React
 const { useRef } = React
 
-export function NoteActions({ actions, noteId, isColorOpen, onToggleColor, selectedColor, onRemoveNote, onSetStyle, onDuplicateNote }) {
+export function NoteActions({
+    actions,
+    noteId,
+    isColorOpen,
+    onToggleColor,
+    selectedColor,
+    onRemoveNote,
+    onSetStyle,
+    onDuplicateNote,
+    onImgUpload
+}) {
 
     const imgInputRef = useRef(null)
 
@@ -58,6 +68,13 @@ export function NoteActions({ actions, noteId, isColorOpen, onToggleColor, selec
         }
     }
 
+    function handleImgUpload(ev) {
+        const file = ev.target.files[0]
+
+        if (!file) return
+        
+        onImgUpload(file)
+    }
 
     return <div className="note-actions-container"
         onClick={ev => ev.stopPropagation()}
@@ -70,6 +87,7 @@ export function NoteActions({ actions, noteId, isColorOpen, onToggleColor, selec
             type="file"
             accept="image/*"
             hidden
+            onChange={handleImgUpload}
         />
 
         {isColorOpen
