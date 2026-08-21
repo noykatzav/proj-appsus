@@ -1,8 +1,11 @@
 import { ColorPicker } from './ColorPicker.jsx'
 
 const { useState } = React
+const { useRef } = React
 
-export function NoteActions({ actions, noteId, isColorOpen, onToggleColor, selectedColor, onRemoveNote, onSetStyle ,onDuplicateNote }) {
+export function NoteActions({ actions, noteId, isColorOpen, onToggleColor, selectedColor, onRemoveNote, onSetStyle, onDuplicateNote }) {
+
+    const imgInputRef = useRef(null)
 
     // const [isColorOpen, setIsColorOpen] = useState(false)
 
@@ -37,7 +40,16 @@ export function NoteActions({ actions, noteId, isColorOpen, onToggleColor, selec
                     type="button"
                     onClick={onDuplicateNote}
                 >
-                    <img src="assets/imgs/duplicate.png" alt="color" title="Duplicate note" />
+                    <img src="assets/imgs/duplicate.png" alt="duplicate" title="Duplicate note" />
+                </button>
+
+            case 'image':
+                return <button
+                    key={action}
+                    type="button"
+                    onClick={() => imgInputRef.current.click()}
+                >
+                    <img src="assets/imgs/img_icon.svg" alt="image" title="Add image" />
                 </button>
 
             default:
@@ -53,6 +65,12 @@ export function NoteActions({ actions, noteId, isColorOpen, onToggleColor, selec
         <div className="note-actions">
             {actions.map(action => getActionButton(action))}
         </div>
+
+        <input ref={imgInputRef}
+            type="file"
+            accept="image/*"
+            hidden
+        />
 
         {isColorOpen
             ? <ColorPicker selectedColor={selectedColor} onSetStyle={onSetStyle} />
