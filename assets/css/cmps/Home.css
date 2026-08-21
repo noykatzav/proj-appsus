@@ -1,28 +1,75 @@
  /* home */
 
 .home {
-    background-color: var(--bg2);
+    height: 90vh;
+
+    display: grid;    
+    justify-content: center;
 }
 
-.home .box-container {
-    padding: 1em 0;
+.welcome {
+    display: flex;
+    align-items: center;
+
+    margin-top: 2rem;
+    border-radius: 40px;
+    background: linear-gradient(0deg, rgba(224, 242, 254, 0.788) 5%,  var(--bg2) 95%);
+    box-shadow:
+        0 1px 2px rgba(60, 64, 67, 0.3),
+        0 2px 6px 2px rgba(60, 64, 67, 0.15);}
+
+.home h1 {
+    font-size: 4em;
+    padding: 2rem;
+    margin: 0;
+}
+
+.home .apps-container {
+    display: grid;
+    gap: 3rem;
+}
+
+.apps-container h2 {
+    font-size: 2em;
+    grid-column: 1 / span 2;
+    place-self: end center;
+}
+
+.home .apps-container div {
+   height: 20vh;
+}
+
+.apps-container .note-app {
+    height: 25vh;
+}
+
+.home .apps-container img {
+    height: 100%;
+    width: auto;
+}
+
+.home .apps-container div {
+    transition: transform 0.5s ease-in-out;
+}
+
+.home .apps-container div:hover {
+    transform: scale(1.1);
 }
 
 .home .box1 {
-    background-color: var(--color1);
     min-height: 10em;
 }
 
 .home .box2 {
-    background-color: var(--color2);
     min-height: 10em;
 }
 
+.box1 {
+    height: 20vh;
+    width: 20vw;
+}
+
  @media (min-width: 750px) {
-    .home .box-container {
-        display: flex;
-        flex-direction: row-reverse;
-    }
     .home .box1 {
         flex: 1
     }
