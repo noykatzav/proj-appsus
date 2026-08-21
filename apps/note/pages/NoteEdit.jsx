@@ -56,7 +56,17 @@ export function NoteEdit({ onSaveNote }) {
             className="note-edit-modal"
             onClick={ev => ev.stopPropagation()}
         >
+
+            {note.type === 'NoteImg' && note.info.url &&
+                <img
+                    className="note-edit-img"
+                    src={note.info.url}
+                    alt=""
+                />
+            }
+
             <textarea
+                className="note-edit-textarea"
                 ref={textAreaRef}
                 name="txt"
                 value={note.info.txt}
