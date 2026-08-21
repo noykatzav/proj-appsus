@@ -64,7 +64,7 @@ export function NoteEdit({ onSaveNote }) {
             />
 
             <button onClick={onSave}>
-                Done
+                Save
             </button>
         </div>
     </div>

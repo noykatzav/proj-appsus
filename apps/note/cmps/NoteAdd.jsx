@@ -1,9 +1,12 @@
 import { NoteActions } from "./NoteActions.jsx"
 
-const { useState } = React
+const { useState, useRef } = React
+
 
 export function NoteAdd({ onAddNote }) {
     const [info, setInfo] = useState({ txt: '' })
+    const [isExpanded, setIsExpanded] = useState(false)
+    const textareaRef = useRef(null)
 
     function handleChange({ target }) {
         const field = target.name
@@ -23,6 +26,8 @@ export function NoteAdd({ onAddNote }) {
 
         onAddNote(info.txt)
         setInfo({ txt: '' })
+        setIsExpanded(false)
+        textareaRef.current.style.height = '50px'
     }
 
     function handleImgUpload(file) {
@@ -30,26 +35,35 @@ export function NoteAdd({ onAddNote }) {
 
         reader.onload = () => {
             console.log(reader.result)
+            setIsExpanded(true)
+
         }
         reader.readAsDataURL(file)
     }
 
-    return <section className="note-add">
+    return <section className={`note-add ${isExpanded ? 'expanded' : ''}`}>
         <textarea
+            ref={textareaRef}
+
             name="txt"
             value={info.txt}
             placeholder="Take a note..."
             onChange={handleChange}
+            onFocus={() => setIsExpanded(true)}
         />
 
-        <NoteActions
-            actions={['image']}
-            onImgUpload={handleImgUpload}
-        />
+        {!isExpanded &&
+            <NoteActions
+                actions={['image']}
+                onImgUpload={handleImgUpload}
+            />
+        }
 
-        <button className="note-close-btn" onClick={onSaveNote}>
-            Done
-        </button>
+        {isExpanded &&
+            <button className="note-close-btn" onClick={onSaveNote}>
+                Add
+            </button>}
+
     </section>
 }
 
