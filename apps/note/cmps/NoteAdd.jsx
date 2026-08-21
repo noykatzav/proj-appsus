@@ -23,12 +23,15 @@ export function NoteAdd({ onAddNote }) {
     }
 
     function onSaveNote() {
-        if (noteType === 'Notetxt' && !info.txt.trim()) return
-        if (noteType ==='NoteImg' && !info.url) return
+        if (noteType === 'NoteTxt' && info.txt.trim()) {
+            onAddNote(noteType, info)
+        }
+        if (noteType === 'NoteImg' && info.url) {
+            onAddNote(noteType, info)
+        }
 
-        onAddNote(noteType, info)
         setInfo({ txt: '' })
-        setNoteType(Notetxt)
+        setNoteType('NoteTxt')
         setIsExpanded(false)
         textareaRef.current.style.height = '50px'
     }
@@ -76,7 +79,7 @@ export function NoteAdd({ onAddNote }) {
 
         {isExpanded &&
             <button className="note-close-btn" onClick={onSaveNote}>
-                Add
+                Close
             </button>}
 
     </section>
