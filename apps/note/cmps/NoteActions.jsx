@@ -12,7 +12,8 @@ export function NoteActions({
     onRemoveNote,
     onSetStyle,
     onDuplicateNote,
-    onImgUpload
+    onImgUpload,
+    onAddVideo
 }) {
 
     const imgInputRef = useRef(null)
@@ -62,6 +63,16 @@ export function NoteActions({
                     <img src="assets/imgs/img_icon.svg" alt="image" title="Add image" />
                 </button>
 
+            case 'video':
+                return <button
+                    key={action}
+                    type="button"
+                    onClick={onAddVideo}
+                >
+                    <img src="assets/imgs/youtube.png" alt="video" title="Add video"
+                    />
+                </button>
+
             default:
                 return null
 
@@ -72,7 +83,7 @@ export function NoteActions({
         const file = ev.target.files[0]
 
         if (!file) return
-        
+
         onImgUpload(file)
     }
 

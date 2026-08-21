@@ -51,6 +51,36 @@ export function NoteAdd({ onAddNote }) {
         reader.readAsDataURL(file)
     }
 
+    function onAddVideo() {
+        setNoteType('NoteVideo')
+        setInfo({
+            txt: '',
+            url: ''
+        })
+        setIsExpanded(true)
+    }
+
+    function handleVideoChange({ target }) {
+        setInfo(prevInfo => ({
+            ...prevInfo,
+            url: target.value
+        }))
+    }
+
+    function getYoutubeEmbedUrl(url) {
+        let videoId
+
+        if (url.includes('youtu.be/')) {
+            videoId = url.split('youtu.be/')[1].split('?')[0]
+        } else if (url.includes('v=')) {
+            videoId = url.split('v=')[1].split('&')[0]
+        }
+
+        if (!videoId) return ''
+
+        return `https://www.youtube.com/embed/${videoId}`
+    }
+
     return <section className={`note-add ${isExpanded ? 'expanded' : ''}`}>
         <textarea
             ref={textareaRef}
@@ -62,6 +92,25 @@ export function NoteAdd({ onAddNote }) {
             onFocus={() => setIsExpanded(true)}
         />
 
+        {noteType === 'NoteVideo' &&
+            <div className="note-video-add">
+                <input
+                    type="text"
+                    value={info.url || ''}
+                    placeholder="Enter YouTube URL"
+                    onChange={handleVideoChange}
+                />
+
+                {getYoutubeEmbedUrl(info.url || '') &&
+                    <iframe
+                        src={getYoutubeEmbedUrl(info.url)}
+                        title="YouTube video"
+                        allowFullScreen
+                    ></iframe>
+                }
+            </div>
+        }
+
         {noteType === 'NoteImg' && info.url &&
             <img
                 className="note-add-img"
@@ -72,8 +121,9 @@ export function NoteAdd({ onAddNote }) {
 
         {!isExpanded &&
             <NoteActions
-                actions={['image']}
+                actions={['image', 'video']}
                 onImgUpload={handleImgUpload}
+                onAddVideo={onAddVideo}
             />
         }
 
