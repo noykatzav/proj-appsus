@@ -27,9 +27,15 @@ function query(filterBy = {}) {
             if (filterBy.type) {
                 notes = notes.filter(note => note.type === filterBy.type)
             }
-            notes.sort((note1, note2) => note2.createdAt - note1.createdAt)
-            return notes
+
+            notes.sort((note1, note2) => {
+                if(note1.isPinned && !note2.isPinned) return -1
+                if(!note1.isPinned && note2.isPinned) return 1
+
+                note2.createdAt - note1.createdAt
         })
+             return notes
+    })
 }
 
 function get(noteId) {
