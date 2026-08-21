@@ -34,10 +34,17 @@ export function NoteList({ notes, onRemoveNote, onSetNotesStyle, onTogglePin }) 
 
                 <button className="btn-pin"
                     type="button"
-                    title="Pin note"
-                    onClick={()=>onTogglePin(note)}>
-                        
-                    <img src="assets/imgs/pin.svg" alt="" />
+                    title={note.isPinned ? 'Unpin note' : 'Pin note'}
+                    onClick={() => onTogglePin(note)}>
+
+                    <img
+                        src={
+                            note.isPinned
+                                ? 'assets/imgs/pinned.svg'
+                                : 'assets/imgs/pin.svg'
+                        }
+                        alt=""
+                    />
                 </button>
 
                 <Link

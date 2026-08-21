@@ -59,3 +59,26 @@
     text-decoration: none;
     overflow-wrap: anywhere;
 }
+
+.btn-pin {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    opacity: 0;
+}
+
+ .note-preview:hover .btn-pin{
+    opacity: 1;
+ }
