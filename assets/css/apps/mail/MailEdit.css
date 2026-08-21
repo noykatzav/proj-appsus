@@ -1,4 +1,8 @@
+/* mail edit*/
+
 .mail-edit textarea {
+    display: grid;
+
     border: none;
     outline: none;
     resize: none;

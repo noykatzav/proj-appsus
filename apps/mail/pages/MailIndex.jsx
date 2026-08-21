@@ -24,7 +24,6 @@ export function MailIndex() {
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchParams))
     const [sortBy, setsortBy] = useState(mailService.getDefaultSort())
 
-
     useEffect(() => {
         loadMails()
     }, [filterBy, sortBy])
@@ -105,6 +104,7 @@ export function MailIndex() {
             getEmptyMail={mailService.getEmptyMail}
             save={mailService.save} 
             showSuccessMsg={showSuccessMsg}
+            setMails={setMails}
         />
 
     </section>

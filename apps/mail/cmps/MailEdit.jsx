@@ -5,7 +5,7 @@ const { useNavigate } = ReactRouterDOM
 import { utilService } from '../../../services/util.service.js'
 import { Modal } from '../cmps/Modal.jsx'
 
-export function MailEdit({ loggedUser, isComposeShown, onCloseCompose, getEmptyMail, save, showSuccessMsg }) {
+export function MailEdit({ loggedUser, isComposeShown, onCloseCompose, getEmptyMail, save, showSuccessMsg, setMails }) {
     const [ mail, setMail ] = useState(getEmptyMail())
 
     const navigate = useNavigate()
@@ -19,7 +19,7 @@ export function MailEdit({ loggedUser, isComposeShown, onCloseCompose, getEmptyM
         console.log(Object.fromEntries(formData))
         const { to, subject, body } = Object.fromEntries(formData)
 
-        const isRead = false
+        const isRead = true
         const from = loggedUser.email
         const sentAt = utilService.getCurrentTimestamp()
 
@@ -36,6 +36,7 @@ export function MailEdit({ loggedUser, isComposeShown, onCloseCompose, getEmptyM
 
         save(updatedMail)
             .then(mail => {
+                setMails(prev => [mail, ...prev, mail])
                 showSuccessMsg(`mail ${mail.id} sent`)
                 onCloseCompose()
             })
@@ -54,6 +55,4 @@ export function MailEdit({ loggedUser, isComposeShown, onCloseCompose, getEmptyM
                 <button type="submit">Send</button>
             </form>        
         </Modal>
-
-    
 }
