@@ -2,6 +2,7 @@ const { useState, useEffect } = React
 const { Link } = ReactRouterDOM
 
 import { NoteActions } from './NoteActions.jsx'
+import { NotePreview } from './NotePreview.jsx'
 
 export function NoteList({ notes, onRemoveNote, onSetNotesStyle, onTogglePin, onDuplicateNote }) {
 
@@ -51,7 +52,7 @@ export function NoteList({ notes, onRemoveNote, onSetNotesStyle, onTogglePin, on
                     to={`/note/edit/${note.id}`}
                     className="note-content"
                 >
-                    {note.info.txt}
+                    <NotePreview note={note} />
                 </Link>
 
                 <NoteActions
