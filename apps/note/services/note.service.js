@@ -299,11 +299,11 @@ function _createNotes() {
             },
             isPinned: false
         },
-  {
+        {
             type: 'NoteImg',
             info: {
-                txt: 'Leo Messi 🐐⚽\nThere will never be another one like him ✨',
-                url: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Lionel-Messi-Argentina-2022-FIFA-World-Cup.jpg'
+                txt: 'Leo Messi the GOAT🐐⚽\nThere will never be another one like him ✨',
+                url: 'assets/imgs/messi.jpg'
             },
             style: {
                 backgroundColor: '#FFFFFF'
@@ -315,7 +315,7 @@ function _createNotes() {
             type: 'NoteImg',
             info: {
                 txt: 'How can anyone say no to this face? 🐶🌷',
-                url: 'https://images.unsplash.com/photo-1552053831-71594a27632d'
+                url: 'https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&w=1600&q=80'
             },
             style: {
                 backgroundColor: '#F6E2DD'
@@ -349,7 +349,7 @@ function _createNotes() {
             },
             isPinned: false
         },
-      
+
         {
             type: 'NoteTodos',
             info: {
@@ -381,7 +381,7 @@ function _createNotes() {
             type: 'NoteImg',
             info: {
                 txt: 'Places I would rather be right now 🏔️🌿',
-                url: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee'
+                url: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&w=1600&q=80'
             },
             style: {
                 backgroundColor: '#B4DDD3'
