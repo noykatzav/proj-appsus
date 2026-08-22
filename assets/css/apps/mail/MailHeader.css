@@ -1,6 +1,8 @@
  /* mail header  */
 
 .mail-header {
+    height: 100%;
+    
     display: flex;
     gap: .2rem;
     align-items: end;
