@@ -9,6 +9,8 @@ export function NoteAdd({ onAddNote }) {
     const [isExpanded, setIsExpanded] = useState(false)
     const textareaRef = useRef(null)
     const [noteType, setNoteType] = useState('NoteTxt')
+    const videoEmbedUrl = noteService.getYoutubeEmbedUrl(info.url || '')
+
 
     function handleChange({ target }) {
         const field = target.name
@@ -31,7 +33,7 @@ export function NoteAdd({ onAddNote }) {
             onAddNote(noteType, info)
         }
 
-        if (noteType === 'NoteVideo' && info.url) {
+        if (noteType === 'NoteVideo' && videoEmbedUrl) {
             onAddNote(noteType, info)
         }
 
@@ -72,6 +74,7 @@ export function NoteAdd({ onAddNote }) {
         }))
     }
 
+
     return <section className={`note-add ${isExpanded ? 'expanded' : ''}`}>
         <textarea
             ref={textareaRef}
@@ -91,9 +94,9 @@ export function NoteAdd({ onAddNote }) {
                     placeholder="Enter YouTube URL"
                     onChange={handleVideoChange}
                 />
-                {info.url &&
+                {videoEmbedUrl && 
                     <iframe
-                        src={noteService.getYoutubeEmbedUrl(info.url)}
+                        src={videoEmbedUrl}
                         title="YouTube video"
                         allowFullScreen
                     ></iframe>

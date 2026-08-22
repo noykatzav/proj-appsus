@@ -102,15 +102,16 @@ function getDefaultFilter() {
         type: ''
     }
 }
-
 function getYoutubeEmbedUrl(url) {
     let videoId
 
     if (url.includes('youtu.be/')) {
         videoId = url.split('youtu.be/')[1].split('?')[0]
+
     } else if (url.includes('v=')) {
         videoId = url.split('v=')[1].split('&')[0]
-    } else {
+
+    } else if (/^[a-zA-Z0-9_-]{11}$/.test(url)) {
         videoId = url
     }
 
@@ -118,7 +119,6 @@ function getYoutubeEmbedUrl(url) {
 
     return `https://www.youtube.com/embed/${videoId}`
 }
-
 
 // const notes = [
 //     {
