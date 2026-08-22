@@ -17,5 +17,6 @@
 
 .mail-header img {
     height: 65%;
+    width: auto;
     padding-bottom: .4rem;
 }
