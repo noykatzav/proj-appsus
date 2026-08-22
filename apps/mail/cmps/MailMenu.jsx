@@ -6,7 +6,7 @@ export function MailMenu({ mails }) {
     const [mailCnt, setMailCnt] = useState(0)
     
     useEffect(() => {
-        setMailCnt(() => mails.filter(mail => mail.isRead).length)
+        setMailCnt(() => mails.filter(mail => !mail.isRead).length)
     }, [mails])
 
 

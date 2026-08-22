@@ -1,20 +1,13 @@
  /* mail index  */
 
 .mail-index {
-    height: calc(100vh - 16px - 16px - 42px);
+    height: calc(100vh - 8px - 8px - 47px - .5rem);
     
     display: grid;
+    gap: .5rem;
     grid-template-columns: .8fr 6fr;
     grid-template-rows: 10% 90%;
 
     background-color: var(--m-bg1);
     font-size: 0.875rem;
 }
-
-.mail-header {
-    display: flex;
-    gap: .2rem;
-
-    padding: .4rem;
-}
-
