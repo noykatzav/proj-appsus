@@ -3,7 +3,7 @@ const { Link } = ReactRouterDOM
 
 import { NoteActions } from './NoteActions.jsx'
 
-export function NoteList({ notes, onRemoveNote, onSetNotesStyle, onTogglePin }) {
+export function NoteList({ notes, onRemoveNote, onSetNotesStyle, onTogglePin, onDuplicateNote }) {
 
     const [openColorNoteId, setOpenColorNoteId] = useState(null)
 
@@ -55,11 +55,12 @@ export function NoteList({ notes, onRemoveNote, onSetNotesStyle, onTogglePin }) 
                 </Link>
 
                 <NoteActions
-                    actions={['color', 'delete']}
+                    actions={['color','duplicate', 'delete']}
                     noteId={note.id}
                     isColorOpen={openColorNoteId === note.id}
                     onToggleColor={() => onToggleColor(note.id)}
                     selectedColor={note.style.backgroundColor}
+                    onDuplicateNote={() => onDuplicateNote(note)}
                     onRemoveNote={onRemoveNote}
                     onSetStyle={(style) => onSetNotesStyle(note, style)}
                 />
