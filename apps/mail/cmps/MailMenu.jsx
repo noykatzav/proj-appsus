@@ -43,7 +43,10 @@ export function MailMenu({ mails, onOpenCompose, loggedUser, setFilterBy, clearF
     }
 
     return <section className="mail-menu">
-                <button onClick={onOpenCompose}>Compose</button>
+                <button className="btn-compose" onClick={onOpenCompose}>
+                    <i className="fa-solid fa-pencil"></i>
+                    <span>Compose</span>
+                </button>
                 {mailBoxes.map(box => (
                     <button
                         key={box.name}

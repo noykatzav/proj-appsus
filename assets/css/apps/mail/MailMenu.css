@@ -37,3 +37,27 @@
 .category.chosen {
     background-color: rgb(211, 227, 253);
 }
+
+.mail-menu .btn-compose {
+    display: flex;
+    align-items: center;
+    place-self: start;
+    gap: .5rem;
+
+    padding: 16px 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: var(--m-bg5);
+    cursor: pointer;
+
+    margin: 0 0 .6rem .4rem;
+
+    font-size: 1rem;
+}
+
+.mail-menu .btn-compose:hover {
+    box-shadow: 0 1px 3px 0 rgba(60, 64, 67, .3), 0 4px 8px 3px rgba(60, 64, 67, .15);
+    background-color: var(--m-bg6);
+}
