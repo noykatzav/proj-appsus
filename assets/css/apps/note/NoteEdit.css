@@ -42,6 +42,7 @@
     font-size: 16px;
 
     box-sizing: border-box;
+    color: var(--note-txt)
 }
 
 .note-edit-modal button {
