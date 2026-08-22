@@ -7,6 +7,8 @@
     width: 95%;
     margin-block-start: .5rem;
     margin-inline: auto;
+
+
 }
 
 .mail-menu a {
@@ -21,6 +23,9 @@
     padding: 6px 18px;
     
     border-radius: 0 15px 15px 0;
+    
+    border: none;
+    background-color: transparent;
 }
 
 .mail-menu .category > :last-child {

@@ -6,13 +6,20 @@ export function MailFilter({ filterBy, sortBy, setFilterBy, setSortBy, defaultFi
 	const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
 	const [sortByToEdit, setSortByToEdit] = useState(sortBy)
 
+    useEffectUpdate(() => {
+        setFilterByToEdit(filterBy)
+    }, [filterBy])
+
+    useEffectUpdate(() => {
+        setSortByToEdit(sortBy)
+    }, [sortBy])
+
 	useEffectUpdate(() => {
 		setFilterBy(filterByToEdit)
 	}, [filterByToEdit])
 
 	useEffectUpdate(() => {
 		setSortBy(sortByToEdit)
-        console.log(sortByToEdit)
 	}, [sortByToEdit])
 
 	function handleFilterChange(ev) {
@@ -42,7 +49,7 @@ export function MailFilter({ filterBy, sortBy, setFilterBy, setSortBy, defaultFi
 
     function clearFilter() {
         setFilterByToEdit(defaultFilter)
-        setSortBy(defaultSort)
+        setSortByToEdit(defaultSort)
     }
 
 	return <section className="mail-filter">

@@ -64,6 +64,11 @@ export function MailIndex() {
         )))
     }
 
+    function clearFilter() {
+        setFilterBy(mailService.getDefaultFilter())
+        setSortBy(mailService.getDefaultSort())
+    }
+
     function onRemoveMail(mailId) {
 		mailService
 			.remove(mailId)
@@ -77,15 +82,25 @@ export function MailIndex() {
 
     return <section className="mail-index">
         <MailHeader />
+        
         <MailFilter 
             filterBy={filterBy} 
             sortBy={sortBy} 
             setFilterBy={setFilterBy} 
             setSortBy={setSortBy}
             defaultFilter={mailService.getDefaultFilter()}
-            defaultSort={mailService.getDefaultSort()}/>
-        <MailMenu mails={mails} />
-
+            defaultSort={mailService.getDefaultSort()}
+            clearFilter={clearFilter}
+        />
+        
+        <MailMenu 
+            mails={mails} 
+            loggedUser={mailService.getLoggedUser()}
+            setFilterBy={setFilterBy} 
+            setSortBy={setSortBy}
+            clearFilter={clearFilter}
+        />
+        
         <MailList
             mails={mails} 
             onSetMailRead={onSetMailRead}
