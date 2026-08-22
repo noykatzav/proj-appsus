@@ -26,7 +26,7 @@ export function MailIndex() {
     }, [filterBy, sortBy])
 
     useEffectUpdate(() => {
-		loadMails(filterBy)
+		loadMails()
 		setSearchParams(utilService.trimObj(filterBy))
 	}, [filterBy])
 

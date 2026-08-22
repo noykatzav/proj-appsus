@@ -134,7 +134,7 @@ function trimObj(obj) {
     const trimmedObj = {}
 
     for (const key in obj) {
-        if (obj[key]) trimmedObj[key] = obj[key]
+        if (obj[key] || obj[key] === false) trimmedObj[key] = obj[key]
     }
     return trimmedObj
 }

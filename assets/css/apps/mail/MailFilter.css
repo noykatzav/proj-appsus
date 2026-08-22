@@ -36,3 +36,19 @@ input:focus {
     background-color: transparent;
     color: rgb(68, 68, 68);
 }
+
+.unread-filter input { 
+    display: none;
+}
+
+.unread-filter span {
+    background:  var(--m-bg1);
+    border: 1px solid var(--m-gray5);
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.unread-filter input:checked + span {
+    background-color: var(--m-gray5);
+}

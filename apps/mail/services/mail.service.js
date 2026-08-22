@@ -48,14 +48,17 @@ function query(options = {}) {
                 mails = mails.filter(mail => regExp.test(mail.subject))
             }
 
-            if (filterBy.isRead) {
-                mails = mails.filter(mail => mail.isRead === true)
+            if (filterBy.from) {
+                mails = mails.filter(mail => mail.from === filterBy.from)
+            }
+
+            if (filterBy.isRead === false) {
+                mails = mails.filter(mail => !mail.isRead)
             }
 
             if (filterBy.isStarred) {
                 mails = mails.filter(mail => mail.isStarred === true)
             }
-
 
             if (sortBy.sortField === 'sentAt') {
                 mails.sort((mail1, mail2) => 
@@ -90,8 +93,8 @@ function getEmptyMail(subject = '', body = '', isRead = false, isStarred = false
     return { createdAt, subject, body, isRead, isStarred, sentAt, removedAt, from, to }
 }
 
-function getDefaultFilter(filterBy = { status: 'inbox/', txt: '', isRead: undefined, isStarred: undefined, lables: [] }) {
-    return { status: filterBy.status, txt: filterBy.txt, isRead: filterBy.isRead, isStarred: filterBy.isStarred, lables: filterBy.lables }
+function getDefaultFilter(filterBy = { status: 'inbox/', txt: '', isRead: undefined, isStarred: undefined, lables: [] , from: ''}) {
+    return { status: filterBy.status, txt: filterBy.txt, isRead: filterBy.isRead, isStarred: filterBy.isStarred, lables: filterBy.lables, from: filterBy.from }
 }
 
 function getFilterFromSearchParams(searchParams) {
@@ -99,7 +102,17 @@ function getFilterFromSearchParams(searchParams) {
     const filterBy = {}
 
     for (const field in defaultFilter) {
-        filterBy[field] = searchParams.get(field) || ''
+        const value = searchParams.get(field)
+        
+        if (value === null) {
+            filterBy[field] = defaultFilter[field]
+        } else if (value === 'true') {
+            filterBy[field] = true
+        } else if (value === 'false') {
+            filterBy[field] = false
+        } else {
+            filterBy[field] = value
+        } 
     }
     return filterBy
 }
