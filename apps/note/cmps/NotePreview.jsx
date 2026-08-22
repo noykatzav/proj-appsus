@@ -4,7 +4,7 @@ import { NoteVideo } from './NoteVideo.jsx'
 import { NoteTodos } from './NoteTodos.jsx'
 
 
-export function NotePreview({ note }) {
+export function NotePreview({ note, onToggleTodo }) {
 
     switch (note.type) {
         case 'NoteTxt':
@@ -17,7 +17,7 @@ export function NotePreview({ note }) {
             return <NoteVideo info={note.info} />
 
         case 'NoteTodos':
-            return <NoteTodos info={note.info} />
+            return <NoteTodos info={note.info}  onToggleTodo={onToggleTodo}/>
 
         default:
             return null

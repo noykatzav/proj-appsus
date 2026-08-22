@@ -94,6 +94,26 @@ export function NoteIndex() {
             .then(loadNotes)
     }
 
+    function onToggleTodo(note, todoIdx) {
+        const todos = [...note.info.todos]
+
+        todos[todoIdx] = {
+            ...todos[todoIdx],
+            isDone: !todos[todoIdx].isDone
+        }
+
+        const updatedNote = {
+            ...note,
+            info: {
+                ...note.info,
+                todos
+            }
+        }
+
+        noteService.save(updatedNote)
+            .then(loadNotes)
+    }
+
     return <section className="notes-container">
         <div className="note-top-bar">
             <NoteHeader />
@@ -101,7 +121,13 @@ export function NoteIndex() {
         </div>
 
         <NoteAdd onAddNote={onAddNote} />
-        <NoteList notes={notes} onRemoveNote={onRemoveNote} onSetNotesStyle={onSetNotesStyle} onTogglePin={onTogglePin} onDuplicateNote={onDuplicateNote} />
+        <NoteList notes={notes}
+            onRemoveNote={onRemoveNote}
+            onSetNotesStyle={onSetNotesStyle}
+            onTogglePin={onTogglePin}
+            onDuplicateNote={onDuplicateNote}
+            onToggleTodo={onToggleTodo}
+        />
         {getNoteEdit()}
 
     </section>

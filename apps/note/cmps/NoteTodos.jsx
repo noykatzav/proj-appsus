@@ -1,4 +1,4 @@
-export function NoteTodos({ info }) {
+export function NoteTodos({ info, onToggleTodo }) {
     return <div className="note-todos">
 
         {info.txt &&
@@ -10,6 +10,8 @@ export function NoteTodos({ info }) {
                 <input
                     type="checkbox"
                     checked={todo.isDone}
+                    onChange={() => onToggleTodo(idx)}
+                    onClick={(ev) => ev.stopPropagation()}
                 />
 
                 <span className={todo.isDone ? 'done' : ''}>
