@@ -128,6 +128,18 @@ export function NoteAdd({ onAddNote }) {
         }))
     }
 
+    function onAddTodo() {
+        setInfo(prevInfo => ({
+            ...prevInfo,
+            todos: [
+                ...prevInfo.todos,
+                {
+                    txt: '',
+                    isDone: false
+                }
+            ]
+        }))
+    }
 
     return <section className={`note-add ${isExpanded ? 'expanded' : ''}`}>
         <textarea
@@ -185,6 +197,17 @@ export function NoteAdd({ onAddNote }) {
                         />
                     </div>
                 )}
+                <button
+                    className="add-todo-btn"
+                    type="button"
+                    onClick={onAddTodo}
+                >
+                    <img
+                        src="assets/imgs/plus.svg"
+                        alt="" title="Add"
+                    />
+                    <span>List item</span>
+                </button>
             </div>
         }
 
