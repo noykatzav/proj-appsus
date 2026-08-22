@@ -77,7 +77,8 @@ export function NoteEdit({ onSaveNote }) {
                 className="note-edit-textarea"
                 ref={textAreaRef}
                 name="txt"
-                value={note.info.txt}
+                value={note.info.txt || ''}
+                placeholder="Take a note..."
                 onChange={handleChange}
             />
 
