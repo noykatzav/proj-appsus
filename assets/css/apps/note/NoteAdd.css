@@ -152,3 +152,31 @@
     display: block;
     margin: -35px 1px 0px;
 }
+
+.note-todos-add {
+    width: 100%;
+ margin: -45px 0px 0px;
+}
+
+.todo-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+       
+
+}
+
+.todo-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+    background: transparent;
+    
+}
+
+.todo-input.done {
+    text-decoration: line-through;
+}

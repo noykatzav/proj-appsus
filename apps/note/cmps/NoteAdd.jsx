@@ -82,13 +82,42 @@ export function NoteAdd({ onAddNote }) {
             todos: [
                 {
                     txt: '',
-                    doneAt: null
+                    isDone: false
                 }
             ]
         })
 
         setIsExpanded(true)
     }
+
+    function handleTodoChange({ target }, todoIdx) {
+        const todos = [...info.todos]
+
+        todos[todoIdx] = {
+            ...todos[todoIdx],
+            txt: target.value
+        }
+
+        setInfo(prevInfo => ({
+            ...prevInfo,
+            todos
+        }))
+    }
+
+    function onToggleTodo(todoIdx) {
+        const todos = [...info.todos]
+        const todo = { ...todos[todoIdx] }
+
+        todo.isDone = !todo.isDone
+        todos[todoIdx] = todo
+
+        setInfo(prevInfo => ({
+            ...prevInfo,
+            todos
+        }))
+    }
+
+
     return <section className={`note-add ${isExpanded ? 'expanded' : ''}`}>
         <textarea
             ref={textareaRef}
@@ -124,6 +153,28 @@ export function NoteAdd({ onAddNote }) {
                 src={info.url}
                 alt=""
             />
+        }
+
+        {noteType === 'NoteTodos' &&
+            <div className="note-todos-add">
+                {info.todos.map((todo, idx) =>
+                    <div className="todo-row" key={idx}>
+                        <input
+                            type="checkbox"
+                            checked={todo.isDone}
+                            onChange={() => onToggleTodo(idx)}
+                        />
+
+                        <input
+                            className={todo.isDone ? 'todo-input done' : 'todo-input'}
+                            type="text"
+                            value={todo.txt}
+                            placeholder="List item"
+                            onChange={(ev) => handleTodoChange(ev, idx)}
+                        />
+                    </div>
+                )}
+            </div>
         }
 
         {!isExpanded &&
