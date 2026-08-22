@@ -1,5 +1,5 @@
 import { NoteActions } from "./NoteActions.jsx"
-import { NoteVideo } from './NoteVideo.jsx'
+import { noteService } from '../services/note.service.js'
 
 const { useState, useRef } = React
 
@@ -91,9 +91,12 @@ export function NoteAdd({ onAddNote }) {
                     placeholder="Enter YouTube URL"
                     onChange={handleVideoChange}
                 />
-
                 {info.url &&
-                    <NoteVideo info={info} />
+                    <iframe
+                        src={noteService.getYoutubeEmbedUrl(info.url)}
+                        title="YouTube video"
+                        allowFullScreen
+                    ></iframe>
                 }
             </div>
         }
