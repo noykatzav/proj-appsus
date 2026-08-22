@@ -192,7 +192,7 @@ export function NoteAdd({ onAddNote }) {
 
         {!isExpanded &&
             <NoteActions
-                actions={['image', 'video', 'todos']}
+                actions={['todos', 'video', 'image']}
                 onImgUpload={handleImgUpload}
                 onAddVideo={onAddVideo}
                 onAddTodos={onAddTodos}
