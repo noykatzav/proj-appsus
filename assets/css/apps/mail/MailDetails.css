@@ -31,6 +31,10 @@
 
 }
 
+.mail-details .mail-details-body {
+    white-space: pre-line;
+}
+
 .mail-details button {
     border: none;
     

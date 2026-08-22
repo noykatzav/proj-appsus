@@ -16,7 +16,7 @@ import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/async-storage.service.js'
 
 const MAIL_KEY = 'mailDB'
-const LoggedinUser = {
+const loggedUser = {
     email: 'noyk@appsus.com',
     fullname: 'Noy Katzav'
 }
@@ -26,14 +26,17 @@ _createMails()
 export const mailService = {
     query,
     get,
+    getLoggedUser,
     remove,
     save,
     getEmptyMail,
     getDefaultFilter,
     getDefaultSort,
     getFilterFromSearchParams,
-    getSortFromSearchParams
+    getSortFromSearchParams,
+    getLoggedUser
 }
+
 // For Debug (easy access from console):
 window.ms = mailService
 
@@ -53,12 +56,24 @@ function query(options = {}) {
                 mails = mails.filter(mail => mail.from === filterBy.from)
             }
 
+            if (filterBy.to) {
+                mails = mails.filter(mail => mail.to === filterBy.to)
+            }
+
             if (filterBy.isRead === false) {
                 mails = mails.filter(mail => !mail.isRead)
             }
 
-            if (filterBy.isStarred) {
+            if (filterBy.isStarred === true) {
                 mails = mails.filter(mail => mail.isStarred === true)
+            }
+
+            if (filterBy.removedAt === undefined) {
+                mails = mails.filter(mail => !mail.removedAt)
+            }
+
+            if (filterBy.removedAt) {
+                mails = mails.filter(mail => mail.removedAt)
             }
 
             if (sortBy.sortField === 'sentAt') {
@@ -75,12 +90,20 @@ function query(options = {}) {
         })
 }
 
+function getLoggedUser() {
+    return {...loggedUser}
+}
+
 function get(mailId) {
     return storageService.get(MAIL_KEY, mailId)
         .then(mail => {
             mail = _setNextPrevMailId(mail)
             return mail
         })
+}
+
+function getLoggedUser() {
+    return {...loggedUser}
 }
 
 function remove(mailId) {
@@ -95,12 +118,12 @@ function save(mail) {
     }
 }
 
-function getEmptyMail(subject = '', body = '', isRead = false, isStarred = false, sentAt = utilService.getCurrentTimestamp(), from = '', to = '', removedAt = null, createdAt = utilService.getCurrentTimestamp()) {
+function getEmptyMail(subject = '', body = '', isRead = false, isStarred = false, sentAt = utilService.getCurrentTimestamp(), from = '', to = '', removedAt = undefined, createdAt = utilService.getCurrentTimestamp()) {
     return { createdAt, subject, body, isRead, isStarred, sentAt, removedAt, from, to }
 }
 
-function getDefaultFilter(filterBy = { status: 'inbox/', txt: '', isRead: undefined, isStarred: undefined, lables: [] , from: ''}) {
-    return { status: filterBy.status, txt: filterBy.txt, isRead: filterBy.isRead, isStarred: filterBy.isStarred, lables: filterBy.lables, from: filterBy.from }
+function getDefaultFilter(filterBy = { status: 'inbox/', txt: '', isRead: undefined, isStarred: undefined, lables: [], removedAt: undefined, from: '', to: loggedUser.email}) {
+    return { status: filterBy.status, txt: filterBy.txt, isRead: filterBy.isRead, isStarred: filterBy.isStarred, lables: filterBy.lables, removedAt: filterBy.removedAt, from: filterBy.from, to: filterBy.to}
 }
 
 function getDefaultSort(sortBy = {sortField: 'sentAt', sortDir: -1} ) {
@@ -444,7 +467,7 @@ const bodies = [
             {
                 email: 'jacob@appsus.com',
                 fullname: 'Jacob Adams'
-            }
+            }, loggedUser
         ]
         const timestamps = [
             1786387474000,
@@ -486,7 +509,7 @@ const bodies = [
             const isStarred = booleanOptions[utilService.getRandomIntInclusive(0, booleanOptions.length - 1)]
             const sentAt = Date.now() - utilService.getRandomIntInclusive(0, 500) * 24 * 60 * 60 * 1000
             const from = users[utilService.getRandomIntInclusive(0, users.length - 1)].email
-            const to = LoggedinUser.email
+            const to = loggedUser.email
 
             mails.push(_createMail(subject, body, isRead, isStarred, sentAt, from, to))
         }                      

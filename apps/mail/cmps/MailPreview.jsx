@@ -1,7 +1,7 @@
 import { utilService } from '../../../services/util.service.js'
 
 
-export function MailPreview({ mail, onSetMailRead, onSetMailUnread, onRemoveMail }) {
+export function MailPreview({ mail, onSetMailRead, onSetMailUnread, onRemoveMail, chosenBox }) {
    
     function formatPreviewDate(timestamp) {
         const isToday = utilService.isToday(timestamp)
@@ -21,15 +21,15 @@ export function MailPreview({ mail, onSetMailRead, onSetMailUnread, onRemoveMail
 
     return <div className={mailClassName} onClick={() => onSetMailRead(mail)}>
             <button><i className={starClassName}></i></button>
-            <span>{mail.from}</span>
+            <span>{chosenBox === 'Sent' ? mail.to : mail.from}</span>
             <span>{mail.subject}</span>
             <span className="mail-time">{mail.sentAt && formatPreviewDate(mail.sentAt)}</span>
 
-            <div className="mail-actions">
+            {mail.removedAt === undefined && <div className="mail-actions">
                 <button className="remove" 
                     onClick={(event) => {event.preventDefault()
                                         event.stopPropagation()
-                                        onRemoveMail(mail.id)
+                                        onRemoveMail(mail)
                                         }}>
                     <i className="fa-solid fa-trash"></i>
                 </button>
@@ -40,6 +40,6 @@ export function MailPreview({ mail, onSetMailRead, onSetMailUnread, onRemoveMail
                                         }}>
                     <i className="fa-regular fa-envelope"></i>
                 </button>
-            </div>
+            </div>}
         </div>
 }

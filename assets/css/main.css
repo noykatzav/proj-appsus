@@ -25,6 +25,7 @@
 @import './apps/mail/MailDetHeader.css';
 @import './apps/mail/MailDetBody.css';
 @import './apps/mail/MailDetFooter.css';
+@import './apps/mail/MailEdit.css';
 
 @import './apps/note/NoteHeader.css';
 @import './apps/note/NoteList.css';

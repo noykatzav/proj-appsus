@@ -5,7 +5,7 @@ export function MailDetActions({ mail, onSetMailUnread, onRemoveMail }) {
 
     return <section className="mail-det-actions">
             <Link to="/mail"><button>{'<'}</button></Link>
-            <button onClick={() => {onRemoveMail(mail.id)}}>
+            <button onClick={() => {onRemoveMail(mail)}}>
                 <i className="fa-solid fa-trash"></i>
             </button>
             <button className="mark-unread"

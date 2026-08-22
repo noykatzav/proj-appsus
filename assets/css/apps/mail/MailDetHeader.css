@@ -1,3 +1,5 @@
+/* mail details footer */
+
 .mail-det-header {
     display: grid;
     grid-template-columns:  minmax(300px, 3fr) minmax(100px, 1fr) 30px;
