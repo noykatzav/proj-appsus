@@ -18,7 +18,7 @@ export function MailIndex() {
 
     const [searchParams, setSearchParams] = useSearchParams()
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchParams))
-    const [sortBy, setsortBy] = useState(mailService.getDefaultSort())
+    const [sortBy, setSortBy] = useState(mailService.getSortFromSearchParams(searchParams))
 
 
     useEffect(() => {
@@ -27,8 +27,11 @@ export function MailIndex() {
 
     useEffectUpdate(() => {
 		loadMails()
-		setSearchParams(utilService.trimObj(filterBy))
-	}, [filterBy])
+		setSearchParams(utilService.trimObj({
+            ...filterBy,
+            ...sortBy
+        }))
+	}, [filterBy, sortBy])
 
     function loadMails() {
         mailService.query({ filterBy, sortBy })
@@ -74,7 +77,13 @@ export function MailIndex() {
 
     return <section className="mail-index">
         <MailHeader />
-        <MailFilter filterBy={filterBy} setFilterBy={setFilterBy} defaultFilter={mailService.getDefaultFilter()}/>
+        <MailFilter 
+            filterBy={filterBy} 
+            sortBy={sortBy} 
+            setFilterBy={setFilterBy} 
+            setSortBy={setSortBy}
+            defaultFilter={mailService.getDefaultFilter()}
+            defaultSort={mailService.getDefaultSort()}/>
         <MailMenu mails={mails} />
 
         <MailList

@@ -31,7 +31,8 @@ export const mailService = {
     getEmptyMail,
     getDefaultFilter,
     getDefaultSort,
-    getFilterFromSearchParams
+    getFilterFromSearchParams,
+    getSortFromSearchParams
 }
 // For Debug (easy access from console):
 window.ms = mailService
@@ -63,6 +64,11 @@ function query(options = {}) {
             if (sortBy.sortField === 'sentAt') {
                 mails.sort((mail1, mail2) => 
                     (mail1.sentAt - mail2.sentAt) * sortBy.sortDir)
+            }            
+
+            if (sortBy.sortField === 'subject') {
+                mails.sort((mail1, mail2) => 
+                    mail1.subject.localeCompare(mail2.subject) * sortBy.sortDir)
             }            
 
             return mails
@@ -97,6 +103,10 @@ function getDefaultFilter(filterBy = { status: 'inbox/', txt: '', isRead: undefi
     return { status: filterBy.status, txt: filterBy.txt, isRead: filterBy.isRead, isStarred: filterBy.isStarred, lables: filterBy.lables, from: filterBy.from }
 }
 
+function getDefaultSort(sortBy = {sortField: 'sentAt', sortDir: -1} ) {
+    return { sortField: sortBy.sortField, sortDir: sortBy.sortDir}
+}
+
 function getFilterFromSearchParams(searchParams) {
     const defaultFilter = getDefaultFilter()
     const filterBy = {}
@@ -117,8 +127,13 @@ function getFilterFromSearchParams(searchParams) {
     return filterBy
 }
 
-function getDefaultSort(sortBy = { sortField: 'sentAt', sortDir: -1}) {
-    return { sortField: sortBy.sortField, sortDir: sortBy.sortDir} 
+function getSortFromSearchParams(searchParams) {
+    const defaultSort = getDefaultSort()
+
+    return {
+        sortField: searchParams.get('sortField') || defaultSort.sortField,
+        sortDir: +(searchParams.get('sortDir') || defaultSort.sortDir)
+    }
 }
 
 function _createMails() {
