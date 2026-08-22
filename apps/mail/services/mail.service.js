@@ -66,8 +66,12 @@ function query(options = {}) {
                 mails = mails.filter(mail => mail.isStarred === true)
             }
 
+            if (filterBy.removedAt === undefined) {
+                mails = mails.filter(mail => !mail.removedAt)
+            }
+
             if (filterBy.removedAt) {
-                mails = mails.filter(mail => mail.removedAt === filterBy.removedAt)
+                mails = mails.filter(mail => mail.removedAt)
             }
 
             if (sortBy.sortField === 'sentAt') {
@@ -112,8 +116,8 @@ function getEmptyMail(subject = '', body = '', isRead = false, isStarred = false
     return { createdAt, subject, body, isRead, isStarred, sentAt, removedAt, from, to }
 }
 
-function getDefaultFilter(filterBy = { status: 'inbox/', txt: '', isRead: undefined, isStarred: undefined, lables: [] , from: ''}) {
-    return { status: filterBy.status, txt: filterBy.txt, isRead: filterBy.isRead, isStarred: filterBy.isStarred, lables: filterBy.lables, from: filterBy.from }
+function getDefaultFilter(filterBy = { status: 'inbox/', txt: '', isRead: undefined, isStarred: undefined, lables: [], removedAt: undefined, from: '', to: loggedUser.email}) {
+    return { status: filterBy.status, txt: filterBy.txt, isRead: filterBy.isRead, isStarred: filterBy.isStarred, lables: filterBy.lables, removedAt: filterBy.removedAt, from: filterBy.from, to: filterBy.to}
 }
 
 function getDefaultSort(sortBy = {sortField: 'sentAt', sortDir: -1} ) {

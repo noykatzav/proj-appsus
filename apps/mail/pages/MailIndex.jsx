@@ -20,6 +20,7 @@ export function MailIndex() {
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchParams))
     const [sortBy, setSortBy] = useState(mailService.getSortFromSearchParams(searchParams))
 
+    const [chosenBox, setChosenBox] = useState('Inbox')
 
     useEffect(() => {
         loadMails()
@@ -69,14 +70,27 @@ export function MailIndex() {
         setSortBy(mailService.getDefaultSort())
     }
 
-    function onRemoveMail(mailId) {
-		mailService
-			.remove(mailId)
-			.then(() => {
+    function onRemoveMail(mail) {
+        const mailId = mail.id
+
+        const updatedMail = {
+            ...mail,
+            removedAt: utilService.getCurrentTimestamp()
+        }
+
+		mailService.save({...mail, removedAt: utilService.getCurrentTimestamp()})
+            .then(() => {
 				setMails(prev => prev.filter(mail => mail.id !== mailId))
+                console.log(updatedMail)
 				showSuccessMsg(`mail ${mailId} removed`)
 			})
-			.catch(err => showErrorMsg(`Couldn't remove ${mailId}`))
+			// .catch(err => showErrorMsg(`Couldn't remove ${mailId}`))
+			// .remove(mailId)
+			// .then(() => {
+			// 	setMails(prev => prev.filter(mail => mail.id !== mailId))
+			// 	showSuccessMsg(`mail ${mailId} removed`)
+			// })
+			// .catch(err => showErrorMsg(`Couldn't remove ${mailId}`))
 	}
     
 
@@ -99,6 +113,8 @@ export function MailIndex() {
             setFilterBy={setFilterBy} 
             setSortBy={setSortBy}
             clearFilter={clearFilter}
+            chosenBox={chosenBox}
+            setChosenBox={setChosenBox}
         />
         
         <MailList
@@ -106,6 +122,7 @@ export function MailIndex() {
             onSetMailRead={onSetMailRead}
             onSetMailUnread={onSetMailUnread}
             onRemoveMail={onRemoveMail}
+            chosenBox={chosenBox}
         />
     </section>
 }

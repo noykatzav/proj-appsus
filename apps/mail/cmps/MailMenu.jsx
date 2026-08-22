@@ -1,10 +1,12 @@
 
 const { useState, useEffect } = React
-const { Link } = ReactRouterDOM
 
-export function MailMenu({ mails, loggedUser, setFilterBy, clearFilter }) {
+import { useEffectUpdate } from '../../../custom-hooks/useEffectUpdate.js'
+
+
+export function MailMenu({ mails, loggedUser, setFilterBy, clearFilter, chosenBox, setChosenBox}) {
     const [mailCnt, setMailCnt] = useState(0)
-    const [chosenBox, setChosenBox] = useState('Inbox')
+
 
     const mailBoxes = [
         {
@@ -19,17 +21,21 @@ export function MailMenu({ mails, loggedUser, setFilterBy, clearFilter }) {
         },
         {
             name: 'Sent',
-            filterBy: {from: loggedUser.email}, 
+            filterBy: {from: loggedUser.email, to: ''}, 
             icon: <i className="fa-regular fa-paper-plane"></i>
         },
         {
             name: 'Trash',
-            filterBy: { removedAt: !undefined },
+            filterBy: { removedAt: true },
             icon: <i className="fa-regular fa-trash-can"></i>
 
         }
     ]
-    
+
+    useEffect(() => {
+        clearFilter()
+    }, [])
+
     useEffect(() => {
         setMailCnt(() => mails.filter(mail => !mail.isRead).length)
     }, [mails])
@@ -38,7 +44,6 @@ export function MailMenu({ mails, loggedUser, setFilterBy, clearFilter }) {
         clearFilter()
         setChosenBox(box.name)
         setFilterBy(box.filterBy)
-
     }
 
     return <section className="mail-menu">
@@ -50,7 +55,7 @@ export function MailMenu({ mails, loggedUser, setFilterBy, clearFilter }) {
                     >
                     {box.icon}
                     <span>{box.name}</span>
-                    {chosenBox === box.name && <span>{mailCnt}</span>}
+                    {chosenBox === box.name && <span className="box-count">{mailCnt}</span>}
                     </button>
                 ))}
         </section>
