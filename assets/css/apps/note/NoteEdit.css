@@ -42,6 +42,7 @@
     font-size: 16px;
 
     box-sizing: border-box;
+    color: var(--note-txt)
 }
 
 .note-edit-modal button {
@@ -53,4 +54,62 @@
     background-color: transparent;
     cursor: pointer;
 
+}
+
+.note-edit-img {
+    display: block;
+
+    width: calc(100% + 32px);
+    max-width: none;
+    height: auto;
+
+    margin-top: -16px;
+    margin-left: -16px;
+
+    border-radius: 8px 8px 0 0;
+}
+
+.note-edit-textarea {
+    margin-top: 10px;
+}
+
+.note-edit-video {
+    display: block;
+
+    width: calc(100% + 32px);
+    max-width: none;
+    aspect-ratio: 16 / 9;
+
+    margin-top: -16px;
+    margin-left: -16px;
+
+    border: none;
+    border-radius: 8px 8px 0 0;
+}
+
+.note-edit-textarea.todos-title {
+    min-height: 24px;
+    height: 24px;
+    margin-bottom: 2px;
+}
+
+.note-edit-modal .add-todo-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+
+    width: fit-content;
+
+    margin-right: auto;
+    margin-left: -22px;
+
+    white-space: nowrap;
+}
+
+.note-edit-modal .add-todo-btn img {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    flex-shrink: 0;
 }

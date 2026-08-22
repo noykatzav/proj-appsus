@@ -2,11 +2,14 @@
 
 .mail-menu {
     display: grid;
-    place-items: start;
+    gap: .2rem;
+    place-items: stretch;
+    align-content: start;
 
     width: 95%;
     margin-block-start: .5rem;
     margin-inline: auto;
+
 }
 
 .mail-menu a {
@@ -18,12 +21,16 @@
     gap: .8rem;
 
     align-items: center;
+    justify-content: start;
     padding: 6px 18px;
     
     border-radius: 0 15px 15px 0;
+    
+    border: none;
+    background-color: transparent;
 }
 
-.mail-menu .category > :last-child {
+.mail-menu .category .box-count {
     margin-inline-start: auto;
 }
 

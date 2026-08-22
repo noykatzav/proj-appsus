@@ -9,13 +9,14 @@
 @import './basics/typography.css';
 
 /* Components */
-@import './cmps/home.css';
+@import './cmps/Home.css';
 @import './cmps/UserMsg.css';
 @import './cmps/AppHeader.css';
 
 @import './apps/note/NoteIndex.css';
 @import './apps/mail/MailIndex.css';
 @import './apps/mail/MailMenu.css';
+@import './apps/mail/MailFilter.css';
 @import './apps/mail/MailList.css';
 @import './apps/mail/MailHeader.css';
 @import './apps/mail/MailPreview.css';
@@ -30,3 +31,9 @@
 @import './apps/note/NoteList.css';
 @import './apps/note/NoteAdd.css';
 @import './apps/note/NoteEdit.css';
+@import './apps/note/ColorPicker.css';
+@import './apps/note/NoteActions.css';
+@import './apps/note/NoteFilter.css';
+@import './apps/note/NoteImage.css';
+@import './apps/note/NoteVideo.css';
+@import './apps/note/NoteTodos.css';

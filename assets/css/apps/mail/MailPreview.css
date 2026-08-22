@@ -68,6 +68,7 @@
 
 .mail-preview.read {
     background-color: var(--m-bg3);
+    color: var(--m-gray4);
     font-family: 'Google Sans';
 }
 

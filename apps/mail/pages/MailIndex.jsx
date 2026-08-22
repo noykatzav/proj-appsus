@@ -20,18 +20,22 @@ export function MailIndex() {
     const [ isComposeShown, setIsComposeShown ] = useState(false)
 
     const [searchParams, setSearchParams] = useSearchParams()
-    // const [ filterBy, setFilterBy ] = useState(mailService.getDefaultFilter())
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchParams))
-    const [sortBy, setsortBy] = useState(mailService.getDefaultSort())
+    const [sortBy, setSortBy] = useState(mailService.getSortFromSearchParams(searchParams))
+
+    const [chosenBox, setChosenBox] = useState('Inbox')
 
     useEffect(() => {
         loadMails()
     }, [filterBy, sortBy])
 
     useEffectUpdate(() => {
-		loadCars(filterBy)
-		setSearchParams(utilService.trimObj(filterBy))
-	}, [filterBy])
+		loadMails()
+		setSearchParams(utilService.trimObj({
+            ...filterBy,
+            ...sortBy
+        }))
+	}, [filterBy, sortBy])
 
     function loadMails() {
         mailService.query({ filterBy, sortBy })
@@ -64,14 +68,32 @@ export function MailIndex() {
         )))
     }
 
-    function onRemoveMail(mailId) {
-		mailService
-			.remove(mailId)
-			.then(() => {
+    function clearFilter() {
+        setFilterBy(mailService.getDefaultFilter())
+        setSortBy(mailService.getDefaultSort())
+    }
+
+    function onRemoveMail(mail) {
+        const mailId = mail.id
+
+        const updatedMail = {
+            ...mail,
+            removedAt: utilService.getCurrentTimestamp()
+        }
+
+		mailService.save({...mail, removedAt: utilService.getCurrentTimestamp()})
+            .then(() => {
 				setMails(prev => prev.filter(mail => mail.id !== mailId))
+                console.log(updatedMail)
 				showSuccessMsg(`mail ${mailId} removed`)
 			})
-			.catch(err => showErrorMsg(`Couldn't remove ${mailId}`))
+			// .catch(err => showErrorMsg(`Couldn't remove ${mailId}`))
+			// .remove(mailId)
+			// .then(() => {
+			// 	setMails(prev => prev.filter(mail => mail.id !== mailId))
+			// 	showSuccessMsg(`mail ${mailId} removed`)
+			// })
+			// .catch(err => showErrorMsg(`Couldn't remove ${mailId}`))
 	}
 
     function onOpenCompose() {
@@ -87,14 +109,33 @@ export function MailIndex() {
 
     return <section className="mail-index">
         <MailHeader />
-        <MailFilter />
-        <MailMenu mails={mails} onOpenCompose={onOpenCompose} />
-
+        
+        <MailFilter 
+            filterBy={filterBy} 
+            sortBy={sortBy} 
+            setFilterBy={setFilterBy} 
+            setSortBy={setSortBy}
+            defaultFilter={mailService.getDefaultFilter()}
+            defaultSort={mailService.getDefaultSort()}
+            clearFilter={clearFilter}
+        />
+        
+        <MailMenu 
+            mails={mails} onOpenCompose={onOpenCompose} 
+            loggedUser={mailService.getLoggedUser()}
+            setFilterBy={setFilterBy} 
+            setSortBy={setSortBy}
+            clearFilter={clearFilter}
+            chosenBox={chosenBox}
+            setChosenBox={setChosenBox}
+        />
+        
         <MailList
             mails={mails} 
             onSetMailRead={onSetMailRead}
             onSetMailUnread={onSetMailUnread}
             onRemoveMail={onRemoveMail}
+            chosenBox={chosenBox}
         />
         
         <MailEdit 

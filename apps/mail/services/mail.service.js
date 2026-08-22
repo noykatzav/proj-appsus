@@ -32,7 +32,9 @@ export const mailService = {
     getEmptyMail,
     getDefaultFilter,
     getDefaultSort,
-    getFilterFromSearchParams
+    getFilterFromSearchParams,
+    getSortFromSearchParams,
+    getLoggedUser
 }
 
 // For Debug (easy access from console):
@@ -50,22 +52,46 @@ function query(options = {}) {
                 mails = mails.filter(mail => regExp.test(mail.subject))
             }
 
-            if (filterBy.isRead) {
-                mails = mails.filter(mail => mail.isRead === true)
+            if (filterBy.from) {
+                mails = mails.filter(mail => mail.from === filterBy.from)
             }
 
-            if (filterBy.isStarred) {
+            if (filterBy.to) {
+                mails = mails.filter(mail => mail.to === filterBy.to)
+            }
+
+            if (filterBy.isRead === false) {
+                mails = mails.filter(mail => !mail.isRead)
+            }
+
+            if (filterBy.isStarred === true) {
                 mails = mails.filter(mail => mail.isStarred === true)
             }
 
+            if (filterBy.removedAt === undefined) {
+                mails = mails.filter(mail => !mail.removedAt)
+            }
+
+            if (filterBy.removedAt) {
+                mails = mails.filter(mail => mail.removedAt)
+            }
 
             if (sortBy.sortField === 'sentAt') {
                 mails.sort((mail1, mail2) => 
                     (mail1.sentAt - mail2.sentAt) * sortBy.sortDir)
             }            
 
+            if (sortBy.sortField === 'subject') {
+                mails.sort((mail1, mail2) => 
+                    mail1.subject.localeCompare(mail2.subject) * sortBy.sortDir)
+            }            
+
             return mails
         })
+}
+
+function getLoggedUser() {
+    return {...loggedUser}
 }
 
 function get(mailId) {
@@ -92,12 +118,16 @@ function save(mail) {
     }
 }
 
-function getEmptyMail(subject = '', body = '', isRead = false, isStarred = false, sentAt = utilService.getCurrentTimestamp(), from = '', to = '', removedAt = null, createdAt = utilService.getCurrentTimestamp()) {
+function getEmptyMail(subject = '', body = '', isRead = false, isStarred = false, sentAt = utilService.getCurrentTimestamp(), from = '', to = '', removedAt = undefined, createdAt = utilService.getCurrentTimestamp()) {
     return { createdAt, subject, body, isRead, isStarred, sentAt, removedAt, from, to }
 }
 
-function getDefaultFilter(filterBy = { status: 'inbox/', txt: '', isRead: undefined, isStarred: undefined, lables: [] }) {
-    return { status: filterBy.status, txt: filterBy.txt, isRead: filterBy.isRead, isStarred: filterBy.isStarred, lables: filterBy.lables }
+function getDefaultFilter(filterBy = { status: 'inbox/', txt: '', isRead: undefined, isStarred: undefined, lables: [], removedAt: undefined, from: '', to: loggedUser.email}) {
+    return { status: filterBy.status, txt: filterBy.txt, isRead: filterBy.isRead, isStarred: filterBy.isStarred, lables: filterBy.lables, removedAt: filterBy.removedAt, from: filterBy.from, to: filterBy.to}
+}
+
+function getDefaultSort(sortBy = {sortField: 'sentAt', sortDir: -1} ) {
+    return { sortField: sortBy.sortField, sortDir: sortBy.sortDir}
 }
 
 function getFilterFromSearchParams(searchParams) {
@@ -105,13 +135,28 @@ function getFilterFromSearchParams(searchParams) {
     const filterBy = {}
 
     for (const field in defaultFilter) {
-        filterBy[field] = searchParams.get(field) || ''
+        const value = searchParams.get(field)
+        
+        if (value === null) {
+            filterBy[field] = defaultFilter[field]
+        } else if (value === 'true') {
+            filterBy[field] = true
+        } else if (value === 'false') {
+            filterBy[field] = false
+        } else {
+            filterBy[field] = value
+        } 
     }
     return filterBy
 }
 
-function getDefaultSort(sortBy = { sortField: 'sentAt', sortDir: -1}) {
-    return { sortField: sortBy.sortField, sortDir: sortBy.sortDir} 
+function getSortFromSearchParams(searchParams) {
+    const defaultSort = getDefaultSort()
+
+    return {
+        sortField: searchParams.get('sortField') || defaultSort.sortField,
+        sortDir: +(searchParams.get('sortDir') || defaultSort.sortDir)
+    }
 }
 
 function _createMails() {
@@ -422,7 +467,7 @@ const bodies = [
             {
                 email: 'jacob@appsus.com',
                 fullname: 'Jacob Adams'
-            }
+            }, loggedUser
         ]
         const timestamps = [
             1786387474000,
@@ -457,7 +502,7 @@ const bodies = [
             1737368043000
         ]
 
-        for (let i = 0; i < 60; i++) {
+        for (let i = 0; i < 170; i++) {
             const subject = subjects[utilService.getRandomIntInclusive(0, subjects.length - 1)]
             const body = bodies[utilService.getRandomIntInclusive(0, bodies.length - 1)]
             const isRead = booleanOptions[utilService.getRandomIntInclusive(0, booleanOptions.length - 1)]

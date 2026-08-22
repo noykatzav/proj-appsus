@@ -11,16 +11,35 @@ export const noteService = {
     get,
     save,
     remove,
-    getEmptyNote
+    getEmptyNote,
+    getDefaultFilter,
+    getYoutubeEmbedUrl
 }
 
 
-function query() {
+function query(filterBy = {}) {
     return storageService.query(NOTE_KEY)
         .then(notes => {
-            notes.sort((note1, note2) => note2.createdAt - note1.createdAt)
-            return notes
+            if (filterBy.txt) {
+                const regExp = new RegExp(filterBy.txt, 'i')
+                notes = notes.filter(note => regExp.test(note.info.txt))
+            }
+
+            if (filterBy.type) {
+                notes = notes.filter(note => note.type === filterBy.type)
+            }
+
+            notes.sort((note1, note2) => {
+                if(note1.isPinned && !note2.isPinned) return -1
+                if(!note1.isPinned && note2.isPinned) return 1
+
+               if(note1.isPinned && note2.isPinned){
+                return (note2.pinnedAt || 0) - (note1.pinnedAt || 0)
+               }
+                  return note2.createdAt - note1.createdAt
         })
+          return notes
+    })
 }
 
 function get(noteId) {
@@ -77,7 +96,29 @@ function remove(noteId) {
     return storageService.remove(NOTE_KEY, noteId)
 }
 
+function getDefaultFilter() {
+    return {
+        txt: '',
+        type: ''
+    }
+}
+function getYoutubeEmbedUrl(url) {
+    let videoId
 
+    if (url.includes('youtu.be/')) {
+        videoId = url.split('youtu.be/')[1].split('?')[0]
+
+    } else if (url.includes('v=')) {
+        videoId = url.split('v=')[1].split('&')[0]
+
+    } else if (/^[a-zA-Z0-9_-]{11}$/.test(url)) {
+        videoId = url
+    }
+
+    if (!videoId) return ''
+
+    return `https://www.youtube.com/embed/${videoId}`
+}
 
 // const notes = [
 //     {
