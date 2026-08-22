@@ -42,6 +42,7 @@ export function MailFilter({ filterBy, sortBy, setFilterBy, setSortBy, defaultFi
 
     function clearFilter() {
         setFilterByToEdit(defaultFilter)
+        setSortBy(defaultSort)
     }
 
 	return <section className="mail-filter">
