@@ -2,6 +2,7 @@ const { useState, useEffect } = React
 const { useParams, useNavigate } = ReactRouterDOM
 
 import { mailService } from '../services/mail.service.js'
+import { utilService } from '../../../services/util.service.js'
 import { MailDetActions } from '../cmps/MailDetActions.jsx'
 import { MailDetHeader } from '../cmps/MailDetHeader.jsx'
 import { MailDetBody } from '../cmps/MailDetBody.jsx'
@@ -27,8 +28,8 @@ export function MailDetails({ onSetMailUnread, onRemoveMail }) {
             .then(() => navigate('/mail'))
     }
     
-    function onRemoveMail(mailId) {
-        mailService.remove(mailId)
+    function onRemoveMail(mail) {
+        mailService.save({...mail, removedAt: utilService.getCurrentTimestamp()})
             .then(() => navigate('/mail'))
     }
             

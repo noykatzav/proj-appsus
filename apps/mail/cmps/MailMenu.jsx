@@ -1,12 +1,8 @@
 
 const { useState, useEffect } = React
 
-import { useEffectUpdate } from '../../../custom-hooks/useEffectUpdate.js'
-
-
 export function MailMenu({ mails, onOpenCompose, loggedUser, setFilterBy, clearFilter, chosenBox, setChosenBox}) {
     const [mailCnt, setMailCnt] = useState(0)
-
 
     const mailBoxes = [
         {

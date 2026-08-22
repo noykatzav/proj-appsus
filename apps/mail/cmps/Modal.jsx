@@ -19,7 +19,8 @@ export function Modal({ isShown, children, onClose = null, className}) {
             onCancel={onCloseModal} 
             className={className}>
 
-                <button 
+                <button
+                    type="button" 
                     className="btn-close"
                     onClick={onCloseModal}>x</button>
 

@@ -76,24 +76,11 @@ export function MailIndex() {
     function onRemoveMail(mail) {
         const mailId = mail.id
 
-        const updatedMail = {
-            ...mail,
-            removedAt: utilService.getCurrentTimestamp()
-        }
-
 		mailService.save({...mail, removedAt: utilService.getCurrentTimestamp()})
             .then(() => {
 				setMails(prev => prev.filter(mail => mail.id !== mailId))
-                console.log(updatedMail)
 				showSuccessMsg(`mail ${mailId} removed`)
 			})
-			// .catch(err => showErrorMsg(`Couldn't remove ${mailId}`))
-			// .remove(mailId)
-			// .then(() => {
-			// 	setMails(prev => prev.filter(mail => mail.id !== mailId))
-			// 	showSuccessMsg(`mail ${mailId} removed`)
-			// })
-			// .catch(err => showErrorMsg(`Couldn't remove ${mailId}`))
 	}
 
     function onOpenCompose() {
@@ -145,7 +132,7 @@ export function MailIndex() {
             getEmptyMail={mailService.getEmptyMail}
             save={mailService.save} 
             showSuccessMsg={showSuccessMsg}
-            setMails={setMails}
+            loadMails={loadMails}
         />
 
     </section>
