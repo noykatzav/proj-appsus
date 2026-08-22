@@ -1,21 +1,36 @@
  /* mail filter  */
-
 .mail-filter {
     place-self: end start;
+    height: 90%;
+    width: 60%;
+    
+    display: grid;
+    gap: .3rem;
+    grid-template-columns: 3% repeat(3, max-content) repeat(3, 1fr);
+    grid-template-rows: 1.5fr .5fr ;
+    place-items: center end;
+}
+
+.text-filter {
     padding-inline: 1.5rem;
+    grid-column: 1 / -1;
+    place-self: stretch;
 
     display: flex;
     align-items: center;
     gap: .3rem;
-
-    height: 60%;
-    width: 60%;
-
+    
     background-color: var(--m-bg4);
     color: var(--m-gray4);
     border-radius: 30px;
     font-size: 1rem;
 }
+
+.text-filter .btn-clear {
+    border: none;
+    background-color: transparent;
+    margin-left: auto;
+} 
 
 input:focus {
     outline: none;
@@ -28,13 +43,21 @@ input:focus {
     border: none;
 }
 
-.mail-filter .btn-clear {
-    margin-left: auto;
+.mail-filter button {
+    border: 1px solid var(--m-gray5);
+    background-color:  var(--m-bg2);
+    border-radius: 20px;
+    height: fit-content;
+    padding: 3px 8px;
+}
+.mail-filter button span {
+    font-size: smaller;
+    margin-left: .5rem;
+}
 
-    border: none;
-    
-    background-color: transparent;
-    color: rgb(68, 68, 68);
+
+.mail-filter button:hover {
+    background-color:  var(--m-bg3);
 }
 
 .unread-filter input { 
@@ -42,13 +65,17 @@ input:focus {
 }
 
 .unread-filter span {
-    background:  var(--m-bg1);
+    background-color:  var(--m-bg2);
     border: 1px solid var(--m-gray5);
     border-radius: 6px;
-    padding: 6px 12px;
+    padding: 3px 6px;
     cursor: pointer;
 }
 
 .unread-filter input:checked + span {
     background-color: var(--m-gray5);
+}
+
+.mail-filter .unread-filter {
+    grid-column: 2 ;
 }
