@@ -1,8 +1,23 @@
 import { ColorPicker } from './ColorPicker.jsx'
 
 const { useState } = React
+const { useRef } = React
 
-export function NoteActions({ actions, noteId, isColorOpen, onToggleColor, selectedColor, onRemoveNote, onSetStyle ,onDuplicateNote }) {
+export function NoteActions({
+    actions,
+    noteId,
+    isColorOpen,
+    onToggleColor,
+    selectedColor,
+    onRemoveNote,
+    onSetStyle,
+    onDuplicateNote,
+    onImgUpload,
+    onAddVideo,
+    onAddTodos
+}) {
+
+    const imgInputRef = useRef(null)
 
     // const [isColorOpen, setIsColorOpen] = useState(false)
 
@@ -37,7 +52,36 @@ export function NoteActions({ actions, noteId, isColorOpen, onToggleColor, selec
                     type="button"
                     onClick={onDuplicateNote}
                 >
-                    <img src="assets/imgs/duplicate.png" alt="color" title="Duplicate note" />
+                    <img src="assets/imgs/duplicate.png" alt="duplicate" title="Duplicate note" />
+                </button>
+
+            case 'image':
+                return <button
+                    key={action}
+                    type="button"
+                    onClick={() => imgInputRef.current.click()}
+                >
+                    <img src="assets/imgs/img_icon.svg" alt="image" title="Add image" />
+                </button>
+
+            case 'video':
+                return <button
+                    key={action}
+                    type="button"
+                    onClick={onAddVideo}
+                >
+                    <img src="assets/imgs/youtube.png" alt="video" title="Add video"
+                    />
+                </button>
+
+            case 'todos':
+                return <button
+                    key={action}
+                    type="button"
+                    onClick={onAddTodos}
+                >
+                    <img src="assets/imgs/checklist_icon.svg" alt="checklist" title="New checklist"
+                    />
                 </button>
 
             default:
@@ -46,6 +90,13 @@ export function NoteActions({ actions, noteId, isColorOpen, onToggleColor, selec
         }
     }
 
+    function handleFileChange(ev) {
+        const file = ev.target.files[0]
+
+        if (!file) return
+
+        onImgUpload(file)
+    }
 
     return <div className="note-actions-container"
         onClick={ev => ev.stopPropagation()}
@@ -53,6 +104,13 @@ export function NoteActions({ actions, noteId, isColorOpen, onToggleColor, selec
         <div className="note-actions">
             {actions.map(action => getActionButton(action))}
         </div>
+
+        <input ref={imgInputRef}
+            type="file"
+            accept="image/*"
+            hidden
+            onChange={handleFileChange}
+        />
 
         {isColorOpen
             ? <ColorPicker selectedColor={selectedColor} onSetStyle={onSetStyle} />

@@ -1,7 +1,17 @@
-const { useState } = React
+import { NoteActions } from "./NoteActions.jsx"
+import { noteService } from '../services/note.service.js'
+import { NoteTodos } from './NoteTodos.jsx'
+
+const { useState, useRef } = React
+
 
 export function NoteAdd({ onAddNote }) {
     const [info, setInfo] = useState({ txt: '' })
+    const [isExpanded, setIsExpanded] = useState(false)
+    const textareaRef = useRef(null)
+    const [noteType, setNoteType] = useState('NoteTxt')
+    const videoEmbedUrl = noteService.getYoutubeEmbedUrl(info.url || '')
+
 
     function handleChange({ target }) {
         const field = target.name
@@ -17,23 +27,183 @@ export function NoteAdd({ onAddNote }) {
     }
 
     function onSaveNote() {
-        if (!info.txt.trim()) return
+        if (noteType === 'NoteTxt' && info.txt.trim()) {
+            onAddNote(noteType, info)
+        }
+        if (noteType === 'NoteImg' && info.url) {
+            onAddNote(noteType, info)
+        }
 
-        onAddNote(info.txt)
+        if (noteType === 'NoteVideo' && videoEmbedUrl) {
+            onAddNote(noteType, info)
+        }
+
+        if (noteType === 'NoteTodos') {
+            const todos = info.todos.filter(todo => todo.txt.trim())
+
+            if (todos.length) {
+                onAddNote(noteType, {
+                    ...info,
+                    todos
+                })
+            }
+        }
+
         setInfo({ txt: '' })
+        setNoteType('NoteTxt')
+        setIsExpanded(false)
+        textareaRef.current.style.height = '50px'
     }
 
-    return  <section className="note-add">
-            <textarea
-                name="txt"
-                value={info.txt}
-                placeholder="Take a note..."
-                onChange={handleChange}
-            />
+    function handleImgUpload(file) {
+        const reader = new FileReader()
 
+        reader.onload = () => {
+            setNoteType('NoteImg')
+            setInfo(prevInfo => ({
+                ...prevInfo,
+                url: reader.result
+            }))
+
+            setIsExpanded(true)
+        }
+        reader.readAsDataURL(file)
+    }
+
+    function onAddVideo() {
+        setNoteType('NoteVideo')
+        setInfo({
+            txt: '',
+            url: ''
+        })
+        setIsExpanded(true)
+    }
+
+    function handleVideoChange({ target }) {
+        setInfo(prevInfo => ({
+            ...prevInfo,
+            url: target.value
+        }))
+    }
+
+    function onAddTodos() {
+        setNoteType('NoteTodos')
+
+        setInfo({
+            txt: '',
+            todos: [
+                {
+                    txt: '',
+                    isDone: false
+                }
+            ]
+        })
+
+        setIsExpanded(true)
+    }
+
+    function handleTodoChange({ target }, todoIdx) {
+        const todos = [...info.todos]
+
+        todos[todoIdx] = {
+            ...todos[todoIdx],
+            txt: target.value
+        }
+
+        setInfo(prevInfo => ({
+            ...prevInfo,
+            todos
+        }))
+    }
+
+    function onToggleTodo(todoIdx) {
+        const todos = [...info.todos]
+        const todo = { ...todos[todoIdx] }
+
+        todo.isDone = !todo.isDone
+        todos[todoIdx] = todo
+
+        setInfo(prevInfo => ({
+            ...prevInfo,
+            todos
+        }))
+    }
+
+    function onAddTodo() {
+        setInfo(prevInfo => ({
+            ...prevInfo,
+            todos: [
+                ...prevInfo.todos,
+                {
+                    txt: '',
+                    isDone: false
+                }
+            ]
+        }))
+    }
+
+   return <section
+    className={`note-add ${isExpanded ? 'expanded' : ''} ${noteType === 'NoteTodos' ? 'todos-mode' : ''}`}
+>
+        <textarea
+            ref={textareaRef}
+
+            name="txt"
+            value={info.txt}
+            placeholder="Take a note..."
+            onChange={handleChange}
+            onFocus={() => setIsExpanded(true)}
+        />
+
+        {noteType === 'NoteVideo' &&
+            <div className="note-video-add">
+                <input
+                    type="text"
+                    value={info.url || ''}
+                    placeholder="Enter YouTube URL"
+                    onChange={handleVideoChange}
+                />
+                {videoEmbedUrl &&
+                    <iframe
+                        src={videoEmbedUrl}
+                        title="YouTube video"
+                        allowFullScreen
+                    ></iframe>
+                }
+            </div>
+        }
+
+        {noteType === 'NoteImg' && info.url &&
+            <img
+                className="note-add-img"
+                src={info.url}
+                alt=""
+            />
+        }
+
+        {noteType === 'NoteTodos' &&
+            <NoteTodos
+                info={info}
+                onToggleTodo={onToggleTodo}
+                onTodoChange={handleTodoChange}
+                onAddTodo={onAddTodo}
+            />
+        }
+
+        {!isExpanded &&
+            <NoteActions
+                actions={['todos', 'video', 'image']}
+                onImgUpload={handleImgUpload}
+                onAddVideo={onAddVideo}
+                onAddTodos={onAddTodos}
+            />
+        }
+
+        {isExpanded &&
             <button className="note-close-btn" onClick={onSaveNote}>
-                Done
-            </button>
-        </section>
+                Close
+            </button>}
+
+    </section>
 }
 

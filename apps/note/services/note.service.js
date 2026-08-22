@@ -12,7 +12,8 @@ export const noteService = {
     save,
     remove,
     getEmptyNote,
-    getDefaultFilter
+    getDefaultFilter,
+    getYoutubeEmbedUrl
 }
 
 
@@ -101,8 +102,23 @@ function getDefaultFilter() {
         type: ''
     }
 }
+function getYoutubeEmbedUrl(url) {
+    let videoId
 
+    if (url.includes('youtu.be/')) {
+        videoId = url.split('youtu.be/')[1].split('?')[0]
 
+    } else if (url.includes('v=')) {
+        videoId = url.split('v=')[1].split('&')[0]
+
+    } else if (/^[a-zA-Z0-9_-]{11}$/.test(url)) {
+        videoId = url
+    }
+
+    if (!videoId) return ''
+
+    return `https://www.youtube.com/embed/${videoId}`
+}
 
 // const notes = [
 //     {

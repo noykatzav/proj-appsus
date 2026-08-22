@@ -1,0 +1,16 @@
+.note-img img {
+    display: block;
+
+    width: calc(100% + 32px);
+    max-width: none;
+    height: auto;
+
+    margin-top: -16px;
+    margin-left: -16px;
+
+    border-radius: 8px 8px 0 0;
+}
+
+.note-img p {
+    margin: 10px 0 0;
+}

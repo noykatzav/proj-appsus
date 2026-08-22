@@ -33,3 +33,6 @@
 @import './apps/note/ColorPicker.css';
 @import './apps/note/NoteActions.css';
 @import './apps/note/NoteFilter.css';
+@import './apps/note/NoteImage.css';
+@import './apps/note/NoteVideo.css';
+@import './apps/note/NoteTodos.css';

@@ -91,3 +91,11 @@
  .note-preview:hover .btn-pin {
      opacity: 1;
  }
+
+ .note-txt {
+    padding-right: 20px;
+    .note-txt {
+    padding-right: 40px;
+    box-sizing: border-box;
+}
+}
