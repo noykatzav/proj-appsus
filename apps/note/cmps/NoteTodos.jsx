@@ -1,7 +1,7 @@
-export function NoteTodos({ info, onToggleTodo }) {
+export function NoteTodos({ info, onToggleTodo, onTodoChange, onAddTodo }) {
     return <div className="note-todos">
 
-        {info.txt &&
+        {!onTodoChange && info.txt &&
             <p>{info.txt}</p>
         }
 
@@ -14,11 +14,34 @@ export function NoteTodos({ info, onToggleTodo }) {
                     onClick={(ev) => ev.stopPropagation()}
                 />
 
-                <span className={todo.isDone ? 'done' : ''}>
+                {onTodoChange &&
+                    <input
+                        className={todo.isDone ? 'todo-input done' : 'todo-input'}
+                        type="text"
+                        value={todo.txt}
+                        placeholder="List item"
+                        onChange={(ev) => onTodoChange(ev, idx)}
+                    />
+                }
+                
+                {!onTodoChange && <span className={todo.isDone ? 'done' : ''}>
                     {todo.txt}
                 </span>
+                }
+
             </div>
         )}
+
+        {onAddTodo &&
+            <button
+                className="add-todo-btn"
+                type="button"
+                onClick={onAddTodo}
+            >
+                <img src="assets/imgs/plus.svg" alt="Add item" />
+                <span>Add item</span>
+            </button>
+        }
 
     </div>
 }

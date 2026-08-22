@@ -1,5 +1,6 @@
 import { NoteActions } from "./NoteActions.jsx"
 import { noteService } from '../services/note.service.js'
+import { NoteTodos } from './NoteTodos.jsx'
 
 const { useState, useRef } = React
 
@@ -141,7 +142,9 @@ export function NoteAdd({ onAddNote }) {
         }))
     }
 
-    return <section className={`note-add ${isExpanded ? 'expanded' : ''}`}>
+   return <section
+    className={`note-add ${isExpanded ? 'expanded' : ''} ${noteType === 'NoteTodos' ? 'todos-mode' : ''}`}
+>
         <textarea
             ref={textareaRef}
 
@@ -179,36 +182,12 @@ export function NoteAdd({ onAddNote }) {
         }
 
         {noteType === 'NoteTodos' &&
-            <div className="note-todos-add">
-                {info.todos.map((todo, idx) =>
-                    <div className="todo-row" key={idx}>
-                        <input
-                            type="checkbox"
-                            checked={todo.isDone}
-                            onChange={() => onToggleTodo(idx)}
-                        />
-
-                        <input
-                            className={todo.isDone ? 'todo-input done' : 'todo-input'}
-                            type="text"
-                            value={todo.txt}
-                            placeholder="List item"
-                            onChange={(ev) => handleTodoChange(ev, idx)}
-                        />
-                    </div>
-                )}
-                <button
-                    className="add-todo-btn"
-                    type="button"
-                    onClick={onAddTodo}
-                >
-                    <img
-                        src="assets/imgs/plus.svg"
-                        alt="" title="Add"
-                    />
-                    <span>List item</span>
-                </button>
-            </div>
+            <NoteTodos
+                info={info}
+                onToggleTodo={onToggleTodo}
+                onTodoChange={handleTodoChange}
+                onAddTodo={onAddTodo}
+            />
         }
 
         {!isExpanded &&

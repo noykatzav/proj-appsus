@@ -1,3 +1,24 @@
+.todo-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.todo-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 16px;
+    background: transparent;
+    
+}
+
+.todo-input.done {
+    text-decoration: line-through;
+}
+
 .todo-preview {
     display: flex;
     align-items: center;
@@ -8,3 +29,29 @@
 .todo-preview .done {
     text-decoration: line-through;
 }
+
+.add-todo-btn  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    padding: 8px 0;
+
+    border: none;
+    background: transparent;
+
+    font-family: inherit;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.add-todo-btn img {
+    width: 18px;
+    height: 18px;
+    display: block;
+    flex-shrink: 0;
+}
+

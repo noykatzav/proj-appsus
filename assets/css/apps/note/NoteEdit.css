@@ -85,3 +85,30 @@
     border: none;
     border-radius: 8px 8px 0 0;
 }
+
+.note-edit-textarea.todos-title {
+    min-height: 24px;
+    height: 24px;
+    margin-bottom: 2px;
+}
+
+.note-edit-modal .add-todo-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+
+    width: fit-content;
+
+    margin-right: auto;
+    margin-left: -22px;
+
+    white-space: nowrap;
+}
+
+.note-edit-modal .add-todo-btn img {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    flex-shrink: 0;
+}
