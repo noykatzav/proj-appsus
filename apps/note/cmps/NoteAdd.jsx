@@ -74,7 +74,21 @@ export function NoteAdd({ onAddNote }) {
         }))
     }
 
+    function onAddTodos() {
+        setNoteType('NoteTodos')
 
+        setInfo({
+            txt: '',
+            todos: [
+                {
+                    txt: '',
+                    doneAt: null
+                }
+            ]
+        })
+
+        setIsExpanded(true)
+    }
     return <section className={`note-add ${isExpanded ? 'expanded' : ''}`}>
         <textarea
             ref={textareaRef}
@@ -94,7 +108,7 @@ export function NoteAdd({ onAddNote }) {
                     placeholder="Enter YouTube URL"
                     onChange={handleVideoChange}
                 />
-                {videoEmbedUrl && 
+                {videoEmbedUrl &&
                     <iframe
                         src={videoEmbedUrl}
                         title="YouTube video"
@@ -114,9 +128,10 @@ export function NoteAdd({ onAddNote }) {
 
         {!isExpanded &&
             <NoteActions
-                actions={['image', 'video']}
+                actions={['image', 'video', 'todos']}
                 onImgUpload={handleImgUpload}
                 onAddVideo={onAddVideo}
+                onAddTodos={onAddTodos}
             />
         }
 

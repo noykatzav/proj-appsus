@@ -13,7 +13,8 @@ export function NoteActions({
     onSetStyle,
     onDuplicateNote,
     onImgUpload,
-    onAddVideo
+    onAddVideo,
+    onAddTodos
 }) {
 
     const imgInputRef = useRef(null)
@@ -70,6 +71,16 @@ export function NoteActions({
                     onClick={onAddVideo}
                 >
                     <img src="assets/imgs/youtube.png" alt="video" title="Add video"
+                    />
+                </button>
+
+            case 'todos':
+                return <button
+                    key={action}
+                    type="button"
+                    onClick={onAddTodos}
+                >
+                    <img src="assets/imgs/checklist_icon.svg" alt="checklist" title="New checklist"
                     />
                 </button>
 
