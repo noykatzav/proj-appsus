@@ -37,6 +37,17 @@ export function NoteAdd({ onAddNote }) {
             onAddNote(noteType, info)
         }
 
+        if (noteType === 'NoteTodos') {
+            const todos = info.todos.filter(todo => todo.txt.trim())
+
+            if (todos.length) {
+                onAddNote(noteType, {
+                    ...info,
+                    todos
+                })
+            }
+        }
+
         setInfo({ txt: '' })
         setNoteType('NoteTxt')
         setIsExpanded(false)
